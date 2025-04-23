@@ -63,7 +63,9 @@
                     </div>
                 </div>
             </nav>
-            <button class="bg-skyBlueDark text-white text-semibold p-2 w-full rounded-md mt-10">Logout</button>
+            <div class="mt-10">
+                <x-button width="w-full" text="Keluar" icon="material-symbols:logout"/>
+            </div>
           </aside>
 
           <main class="flex-1 p-6 ml-64">

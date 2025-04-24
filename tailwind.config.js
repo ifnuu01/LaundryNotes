@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'], 
+      },
       colors: {
         skyBlue: '#E3FAFF',
         skyBlueDark: '#21B7E2',

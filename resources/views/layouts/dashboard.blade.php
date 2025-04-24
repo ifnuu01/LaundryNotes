@@ -9,7 +9,7 @@
     @stack('styles')
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
-<body class="bg-skyBlue">
+<body class="bg-skyBlue font-jakarta">
     <div class="flex min-h-screen">
         <aside class="w-64 p-6 fixed h-full">
             <div class="flex items-center gap-4">

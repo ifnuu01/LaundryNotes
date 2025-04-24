@@ -8,7 +8,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
-<body>
+<body class="font-jakarta">
     @yield('content')
+    @stack('scripts')
 </body>
 </html>

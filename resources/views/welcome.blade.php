@@ -25,7 +25,7 @@
 <div class="bg-bg">
     <nav class="flex justify-between items-cente py-3 px-6 md:px-44 fixed z-50 w-full">
         {{-- Logo --}}
-        <div class="flex items-center gap-2">
+        <div data-aos="fade" data-aos-duration="1000" class="flex items-center gap-2">
             <img src="{{ asset('images/logo.svg') }}" width="60" alt="Logo Laundry Notes">
             <h1 class="text-2xl md:text-3xl text-skyBlueDark ">LaundryNotes</h1>
         </div>
@@ -37,9 +37,9 @@
     
         {{-- Menu --}}
         <div class="hidden md:flex md:gap-10 items-center">
-            <a href="#" class="text-fg hover:text-skyBlueDark hover:font-semibold transition-all">Beranda</a>
-            <a href="#" class="text-fg hover:text-skyBlueDark hover:font-semibold transition-all">Cara Kerja</a>
-            <a href="#" class="text-fg hover:text-skyBlueDark hover:font-semibold transition-all">Paket</a>
+            <a href="#beranda" class="text-fg hover:text-skyBlueDark hover:font-semibold transition-all">Beranda</a>
+            <a href="#caraKerja" class="text-fg hover:text-skyBlueDark hover:font-semibold transition-all">Cara Kerja</a>
+            <a href="#paket" class="text-fg hover:text-skyBlueDark hover:font-semibold transition-all">Paket</a>
         </div>
     
         {{-- Menu Sidebar --}}
@@ -48,9 +48,9 @@
                 <button id="menu-close" class="self-end">
                     <iconify-icon icon="material-symbols:close" width="26" height="26" class="text-fg"></iconify-icon>
                 </button>
-                <a href="#" class="text-fg hover:text-skyBlueDark font-medium text-lg transition">Beranda</a>
-                <a href="#" class="text-fg hover:text-skyBlueDark font-medium text-lg transition">Cara Kerja</a>
-                <a href="#" class="text-fg hover:text-skyBlueDark font-medium text-lg transition">Paket</a>
+                <a href="#beranda" data-aos="fade-left" data-aos-duration="2000" class="text-fg hover:text-skyBlueDark font-medium text-lg transition">Beranda</a>
+                <a href="#caraKerja" data-aos="fade-left" data-aos-duration="2000" class="text-fg hover:text-skyBlueDark font-medium text-lg transition">Cara Kerja</a>
+                <a href="#paket" data-aos="fade-left" data-aos-duration="2000" class="text-fg hover:text-skyBlueDark font-medium text-lg transition">Paket</a>
             </div>
         </div>
         {{-- Overlay --}}
@@ -58,38 +58,38 @@
     </nav>  
     
     {{-- Section awal --}}
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center py-20 px-6 md:px-44 relative overflow-hidden">
-        <div class="flex flex-col gap-4 bg-transparent z-20 h-[400px] justify-center">
+    <section id="beranda" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center py-20 px-6 md:px-44 relative overflow-hidden">
+        <div data-aos="fade-right" data-aos-duration="1000" class="flex flex-col gap-4 bg-transparent z-20 h-[400px] justify-center">
             <h1 class="text-2xl md:text-5xl font-bold text-fg">Kalau bukan hari ini <b class="text-skyBlueDark">cucinya</b>, besok siap-siap tanpa baju.</h1>
             <p class="text-base md:text-lg text-fg">Cuci, kering, lipat. Hemat waktu, hemat biaya. Antar-jemput? Siap!</p>
-            <a href="" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-full">Bagaimana Cara Kerjanya?</a>
+            <a data-aos="fade-right" data-aos-duration="2000" href="" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-full">Bagaimana Cara Kerjanya?</a>
         </div>
-        <div class="hidden md:block">
+        <div data-aos="fade-left" data-aos-duration="2000" class="hidden md:block">
             <img src="{{asset('images/cucianGelembung.svg')}}" class="w-[400px] md:w-[650px]" alt="">
         </div>
     </section>
 
     {{-- Section langkah --}}
-    <section class="py-10 px-6 md:px-44 bg-skyBlue flex flex-col justify-center items-center gap-4">
-        <p class="text-skyBlueDark">Cara Kerja</p>
-        <h1 class="text-2xl md:text-5xl font-bold text-fg">Selesai dalam 4 tahap</h1>
+    <section id="caraKerja" class="py-10 px-6 md:px-44 bg-skyBlue flex flex-col justify-center items-center gap-4">
+        <p data-aos="zoom-in" data-aos-duration="1000" class="text-skyBlueDark">Cara Kerja</p>
+        <h1 data-aos="zoom-in" data-aos-duration="1000" class="text-2xl md:text-5xl font-bold text-fg">Selesai dalam 4 tahap</h1>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
-            <div class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
+            <div data-aos="fade-up" data-aos-duration="2000" class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
                 <p class="text-skyBlueDark">Langakh 1</p>
                 <h1 class="text-xl md:text-4xl font-bold text-fg">Penjemputan</h1>
                 <img src="{{asset('images/address.svg')}}" alt="">
             </div>
-            <div class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
+            <div data-aos="fade-up" data-aos-duration="2000" class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
                 <p class="text-skyBlueDark">Langakh 2</p>
                 <h1 class="text-xl md:text-4xl font-bold text-fg text-center">Cuci & Keringkan</h1>
                 <img src="{{asset('images/mesinCuci.svg')}}" alt="">
             </div>
-            <div class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
+            <div data-aos="fade-up" data-aos-duration="2000" class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
                 <p class="text-skyBlueDark">Langakh 1</p>
                 <h1 class="text-xl md:text-4xl font-bold text-fg">Lipat</h1>
                 <img src="{{asset('images/mesinPakaian.svg')}}" alt="">
             </div>
-            <div class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
+            <div data-aos="fade-up" data-aos-duration="2000" class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
                 <p class="text-skyBlueDark">Langakh 1</p>
                 <h1 class="text-xl md:text-4xl font-bold text-fg">Pengantaran</h1>
                 <img src="{{asset('images/pesanOrang.svg')}}" alt="">
@@ -97,11 +97,11 @@
         </div>
     </section>
     
-    <section class="py-10 px-6 md:px-44 flex flex-col justify-center items-center gap-4">
-        <p class="text-skyBlueDark">Paket Layanan</p>
-        <h1 class="text-2xl md:text-5xl font-bold text-fg">Paket Terlaris</h1>
+    <section id="paket" class="py-10 px-6 md:px-44 flex flex-col justify-center items-center gap-4">
+        <p data-aos="zoom-in" class="text-skyBlueDark">Paket Layanan</p>
+        <h1 data-aos="zoom-in" class="text-2xl md:text-5xl font-bold text-fg">Paket Terlaris</h1>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
-            <div class="flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-bg">
+            <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-bg">
                 <h1 class="text-4xl text-skyBlueDark font-bold">Paket Reguler</h1>
                 <p class="text-fg">Benefit:</p>
                 <div class="mt-4 flex flex-col gap-2 w-full">
@@ -120,7 +120,7 @@
                 </div>
                 <button  class="bg-skyBlueDark w-full text-white font-semibold p-4 mt-4 rounded-full">Rp 7.000/Kg</button>
             </div>
-            <div class="flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-skyBlue">
+            <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-skyBlue">
                 <h1 class="text-4xl text-skyBlueDark font-bold">Paket Express</h1>
                 <p class="text-fg">Benefit:</p>
                 <div class="mt-4 flex flex-col gap-2 w-full">
@@ -139,7 +139,7 @@
                 </div>
                 <button  class="bg-skyBlueDark w-full text-white font-semibold p-4 mt-4 rounded-full">Rp 7.000/Kg</button>
             </div>
-            <div class="flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-bg">
+            <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-bg">
                 <h1 class="text-4xl text-skyBlueDark font-bold">Paket Premium</h1>
                 <p class="text-fg">Benefit:</p>
                 <div class="mt-4 flex flex-col gap-2 w-full">
@@ -161,14 +161,14 @@
         </div>
     </section>
 
-    <section class="py-10 px-6 md:px-44 flex justify-center items-center gap-4">
+    <section data-aos="zoom-in" data-aos-duration="2000" class="py-10 px-6 md:px-44 flex justify-center items-center gap-4">
         <div class="bg-skyBlueDark w-full rounded-lg shadow-md flex flex-col gap-4 p-6 md:p-10 justify-center items-center">
             <h1 class="text-2xl md:text-5xl font-bold text-white text-center">Cucian numpuk? <br> Kami yang beresin!</h1>
             <button  class="bg-white w-fit text-skyBlueDark font-semibold px-6 py-4 mt-4 rounded-full">Laundry Sekarang</button>
         </div>
     </section>
 
-    <footer class="bg-bg text-fg px-6 md:px-44 py-10">
+    <footer data-aos="fade" data-aos-duration="2000" class="bg-bg text-fg px-6 md:px-44 py-10">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6 border-b pb-6">
             <div>
                 <h1 class="text-2xl font-bold text-skyBlueDark">LaundryNotes</h1>

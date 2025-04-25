@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'List Kasir')
+@section('title', 'Daftar Kasir')
 @push('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 @endpush
@@ -47,7 +47,7 @@
 @section('content')
 <div class="flex justify-between items-center mb-4">
     <div class="flex flex-col gap-2">
-        <h2 class="text-lg font-semibold text-fg">List Kasir</h2>
+        <h2 class="text-lg font-semibold text-fg">Daftar Kasir</h2>
         <p class="text-fg text-sm">Menampilkan semua kasri pada sistem LaundryNotes</p>
     </div>
     <button class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">

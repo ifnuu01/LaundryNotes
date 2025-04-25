@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', 'List Riwayat Pesanan')
+@section('title', 'Daftar Riwayat Pesanan')
 @push('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 @endpush
@@ -47,12 +47,12 @@
 @section('content')
 <div class="flex justify-between items-center mb-4">
     <div class="flex flex-col gap-2">
-        <h2 class="text-lg font-semibold text-fg">List Riwayat Pesanan Laundry</h2>
+        <h2 class="text-lg font-semibold text-fg">Daftar Riwayat Pesanan Laundry</h2>
         <p class="text-fg text-sm">Menampilkan semua riwayat pesanan pada sistem LaundryNotes</p>
     </div>
 </div>
 
-<div class="mt-10">
+<div class="mt-4">
     <table id="pesananTable" class="w-full text-sm">
         <thead>
             <tr class="text-fg font-semibold">

@@ -23,7 +23,7 @@
 @endpush
 @section('content')
 <div class="bg-bg">
-    <nav class="flex justify-between items-cente py-3 px-6 md:px-44 fixed z-50 w-full">
+    <nav class="flex justify-between items-cente py-3 px-6 md:px-44 fixed z-50 w-full animate-fade-down">
         {{-- Logo --}}
         <div data-aos="fade" data-aos-duration="1000" class="flex items-center gap-2">
             <img src="{{ asset('images/logo.svg') }}" width="60" alt="Logo Laundry Notes">
@@ -59,12 +59,12 @@
     
     {{-- Section awal --}}
     <section id="beranda" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-items-center py-20 px-6 md:px-44 relative overflow-hidden">
-        <div data-aos="fade-right" data-aos-duration="1000" class="flex flex-col gap-4 bg-transparent z-20 h-[400px] justify-center">
+        <div class="flex flex-col gap-4 bg-transparent z-20 h-[400px] justify-center animate-fade-left">
             <h1 class="text-2xl md:text-5xl font-bold text-fg">Kalau bukan hari ini <b class="text-skyBlueDark">cucinya</b>, besok siap-siap tanpa baju.</h1>
             <p class="text-base md:text-lg text-fg">Cuci, kering, lipat. Hemat waktu, hemat biaya. Antar-jemput? Siap!</p>
-            <a data-aos="fade-right" data-aos-duration="2000" href="" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-full">Bagaimana Cara Kerjanya?</a>
+            <a href="" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-full">Bagaimana Cara Kerjanya?</a>
         </div>
-        <div data-aos="fade-left" data-aos-duration="2000" class="hidden md:block">
+        <div class="hidden md:block animate-fade-right">
             <img src="{{asset('images/cucianGelembung.svg')}}" class="w-[400px] md:w-[650px]" alt="">
         </div>
     </section>

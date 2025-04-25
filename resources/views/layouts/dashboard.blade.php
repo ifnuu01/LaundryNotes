@@ -20,18 +20,18 @@
             <nav class="space-y-4 text-fg mt-4">
                 <p class="text-fg text-sm mb-2 font-semibold">Dashboard</p>
                 <div class="ml-2 flex flex-col gap-y-1">
-                    <div class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
+                    <a href="#" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
                         <iconify-icon icon="material-symbols:dashboard-outline" width="24" height="24"></iconify-icon>
-                        <a href="#" class="block text-sm font-semibold py-2">Beranda</a>
-                    </div>
-                    <div class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/pesanan*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
+                        <span class="block text-sm font-semibold py-2">Beranda</span>
+                    </a>
+                    <a href="{{ route('pesanan.index') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/pesanan*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
                         <iconify-icon icon="lets-icons:order" width="24" height="24"></iconify-icon>
-                        <a href="{{ route('pesanan.index') }}" class="block text-sm font-semibold py-2">Pesanan</a>
-                    </div>
-                    <div class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/riwayat*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
+                        <span class="block text-sm font-semibold py-2">Pesanan</span>
+                    </a>
+                    <a href="{{ route('riwayat.index') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/riwayat*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
                         <iconify-icon icon="subway:time-2" width="24" height="24"></iconify-icon>
-                        <a href="{{ route('riwayat.index') }}" class="block text-sm font-semibold py-2">Riwayat Pesanan</a>
-                    </div>
+                        <span class="block text-sm font-semibold py-2">Riwayat Pesanan</span>
+                    </a>
                 </div>
             
                 <p class="text-fg text-sm mb-2 font-semibold">Master Data</p>

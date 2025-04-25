@@ -64,15 +64,17 @@
                     </div>
                 </div>
             </nav>
-            <div class="mt-10">
-                <x-button width="w-full" text="Keluar" icon="material-symbols:logout"/>
-            </div>
           </aside>
 
           <main class="flex-1 p-6 ml-64">
-            <div class="mb-6">
-              <h1 class="text-lg text-fg font-semibold">Selamat Datang, Syifai Matcha</h1>
-              <p class="text-sm text-fg">Selasa, 18 Maret 2025</p>
+            <div class="mb-6 flex justify-between items-center">
+                <div>
+                    <h1 class="text-lg text-fg font-semibold">Selamat Datang, Syifai Matcha</h1>
+                    <p class="text-sm text-fg">Selasa, 18 Maret 2025</p>
+                </div>
+                <div>
+                    <x-button width="w-full" text="Keluar" icon="material-symbols:logout"/>
+                </div>
             </div>
             <div class="bg-white p-6 rounded-md shadow-sm mt-12">
               @yield('content')

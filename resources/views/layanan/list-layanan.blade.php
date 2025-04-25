@@ -56,7 +56,7 @@
     </button>
 </div>
 
-<div class="mt-10">
+<div class="mt-4">
     <table id="pesananTable" class="w-full text-sm">
         <thead>
             <tr class="text-fg font-semibold">

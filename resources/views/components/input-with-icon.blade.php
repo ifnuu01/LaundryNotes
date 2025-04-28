@@ -4,6 +4,6 @@
         <iconify-icon icon="{{ $icon }}" class="text-fg" width="24" height="24"></iconify-icon>
         <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" 
                class="rounded-md p-2 outline-none w-full text-sm text-fg placeholder:text-fg/50"
-               placeholder="{{ $placeholder }}" required>
+               placeholder="{{ $placeholder }}">
     </div>
 </div>

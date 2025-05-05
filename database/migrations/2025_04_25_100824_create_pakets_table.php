@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pakets', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('layanan');
+            $table->string('catatan')->nullable();
             $table->decimal('harga_per_kg', 10, 2);
             $table->enum('status', ['aktif', 'nonaktif']);
             $table->timestamps();

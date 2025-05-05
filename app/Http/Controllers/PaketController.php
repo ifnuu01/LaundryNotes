@@ -39,6 +39,7 @@ class PaketController extends Controller
             'nama' => $request->nama,
             'harga_per_kg' => $request->harga_per_kg,
             'status' => $request->status,
+            'catatan' => $request->catatan,
         ]);
 
         return redirect()->route('layanan.list-layanan')->with('success', 'Paket berhasil ditambahkan');
@@ -80,6 +81,7 @@ class PaketController extends Controller
             'nama' => $request->nama,
             'harga_per_kg' => $request->harga_per_kg,
             'status' => $request->status,
+            'catatan' => $request->catatan,
         ]);
 
         return redirect()->route('layanan.list-layanan')->with('success', 'Paket berhasil diperbarui');

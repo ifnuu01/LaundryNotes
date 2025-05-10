@@ -9,6 +9,9 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\UsersController;
 
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\TransaksiController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,3 +51,13 @@ Route::get('/dashboard/paket-terlaris', function () {
 Route::get('/dashboard/total-pendapatan', function () {
     return view('laporan.total-pendapatan');
 })->name('laporan.pendapatan');
+
+// -------------------------
+Route::middleware(['auth'])->group(function () {
+    Route::get('/laporan/pemesanan', [LaporanController::class, 'pemesanan']);
+    Route::get('/laporan/pendapatan', [LaporanController::class, 'pendapatan']);
+    Route::get('/laporan/paket-terlaris', [LaporanController::class, 'paketTerlaris']);
+    Route::get('/laporan/kinerja-kasir', [LaporanController::class, 'kinerjaKasir']);
+    
+    Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'cetakStruk']);
+});

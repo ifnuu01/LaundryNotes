@@ -7,7 +7,7 @@
             type="{{ $type }}" 
             name="{{ $name }}" 
             id="{{ $name }}" 
-            class="rounded-md p-2 capitalize outline-none w-full text-sm text-fg placeholder:text-fg/50"
+            class="rounded-md p-2 outline-none w-full text-sm text-fg placeholder:text-fg/50"
             placeholder="{{ $placeholder }}" 
             value="{{ old($name, $value ?? '') }}" 
             {{ $attributes->merge(['disabled' => $disabled ?? false]) }}

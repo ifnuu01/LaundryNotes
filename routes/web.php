@@ -23,41 +23,41 @@ use App\Http\Controllers\TransaksiController;
 |
 */
 
-Route::resource('/', WelcomeController::class);
 
-Route::get('/login', [AuthController::class, 'index'])->name("login");
-Route::post('/login-proses', [AuthController::class, 'loginProses'])->name("login-proses");
 
-// pake resouce untuk CRUD
-Route::resource('dashboard/pesanan', PesananController::class);
-Route::resource('dashboard/riwayat', RiwayatController::class);
-Route::resource('dashboard/layanan', PaketController::class);
+Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
+    Route::resource('dashboard/pesanan', PesananController::class);
+    Route::resource('dashboard/riwayat', RiwayatController::class);
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+});
 
-// User maksudnya Buat CRUD Kasir
-Route::resource('dashboard/kasir', UsersController::class);
-
-Route::get('/dashboard/jumlah-pemesanan', function () {
-    return view('laporan.jumlah-pemesanan');
-})->name('laporan.pemesanan');
-
-Route::get('/dashboard/kinerja-kasir', function () {
-    return view('laporan.kinerja-kasir');
-})->name('laporan.kasir');
-
-Route::get('/dashboard/paket-terlaris', function () {
-    return view('laporan.paket-terlaris');
-})->name('laporan.terlaris');
-
-Route::get('/dashboard/total-pendapatan', function () {
-    return view('laporan.total-pendapatan');
-})->name('laporan.pendapatan');
-
-// -------------------------
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('dashboard/kasir', UsersController::class);
+    Route::resource('dashboard/layanan', PaketController::class);
     Route::get('/laporan/pemesanan', [LaporanController::class, 'pemesanan']);
     Route::get('/laporan/pendapatan', [LaporanController::class, 'pendapatan']);
     Route::get('/laporan/paket-terlaris', [LaporanController::class, 'paketTerlaris']);
     Route::get('/laporan/kinerja-kasir', [LaporanController::class, 'kinerjaKasir']);
-    
     Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'cetakStruk']);
+    Route::get('/dashboard/jumlah-pemesanan', function () {
+        return view('laporan.jumlah-pemesanan');
+    })->name('laporan.pemesanan');
+
+    Route::get('/dashboard/kinerja-kasir', function () {
+        return view('laporan.kinerja-kasir');
+    })->name('laporan.kasir');
+
+    Route::get('/dashboard/paket-terlaris', function () {
+        return view('laporan.paket-terlaris');
+    })->name('laporan.terlaris');
+
+    Route::get('/dashboard/total-pendapatan', function () {
+        return view('laporan.total-pendapatan');
+    })->name('laporan.pendapatan');
+});
+
+Route::middleware(['guest'])->group(function () {
+    Route::resource('/', WelcomeController::class);
+    Route::get('/login', [AuthController::class, 'index'])->name("login");
+    Route::post('/login-proses', [AuthController::class, 'loginProses'])->name("login-proses");
 });

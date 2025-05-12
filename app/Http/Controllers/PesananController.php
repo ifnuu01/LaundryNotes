@@ -22,8 +22,8 @@ class PesananController extends Controller
      */
     public function create()
     {
-        $paket = Pakets::all();
-        return view('pesanan.create', compact('paket'));
+        $pakets = Pakets::all();
+        return view('pesanan.create', compact('pakets'));
     }
 
     /**
@@ -34,8 +34,6 @@ class PesananController extends Controller
         $request->validate([
             'nama_pelanggan' => 'required|string|max:100|',
             'berat_kg' => 'required|numeric',
-            'tanggal_pesan' => 'required|date',
-            'tanggal_selesai' => 'required|date',
             'status' => 'required',
             'catatan' => 'nullable|string|max:5000',
         ]);
@@ -43,13 +41,14 @@ class PesananController extends Controller
         Pesanan::create([
             'nama_pelanggan' => $request->nama_pelanggan,
             'berat_kg' => $request->berat_kg,
-            'tanggal_pesan' => $request->tanggal_pesan,
+            'id_paket' => $request->id_paket,
+            'tanggal_pesan' => time(),
             'tanggal_selesai' => $request->tanggal_selesai,
-            'status' => $request->status,
+            'status' => "proses",
             'catatan' => $request->catatan,
         ]);
 
-        return redirect()->route('pesanan.list-pesanan')->with('success', 'Pesanan berhasil ditambahkan');
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil ditambahkan');
     }
 
     /**
@@ -58,7 +57,7 @@ class PesananController extends Controller
     public function show(Pesanan $pesanan)
     {
         if (!$pesanan) {
-            return redirect()->route('pesanan.list-pesanan')->with('error', 'Pesanan tidak ditemukan');
+            return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
         }
         return view('pesanan.detail', compact('pesanan'));
     }
@@ -69,7 +68,7 @@ class PesananController extends Controller
     public function edit(Pesanan $pesanan)
     {
         if (!$pesanan) {
-            return redirect()->route('pesanan.list-pesanan')->with('error', 'Pesanan tidak ditemukan');
+            return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
         }
         $paket = Pakets::all();
         return view('pesanan.edit', compact('pesanan', 'paket'));
@@ -98,7 +97,7 @@ class PesananController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        return redirect()->route('pesanan.list-pesanan')->with('success', 'Pesanan berhasil diperbarui');
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil diperbarui');
     }
 
     /**
@@ -107,10 +106,10 @@ class PesananController extends Controller
     public function destroy(Pesanan $pesanan)
     {
         if (!$pesanan) {
-            return redirect()->route('pesanan.list-pesanan')->with('error', 'Pesanan tidak ditemukan');
+            return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
         }
 
         $pesanan->delete();
-        return redirect()->route('pesanan.list-pesanan')->with('success', 'Pesanan berhasil dihapus');
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dihapus');
     }
 }

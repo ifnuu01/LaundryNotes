@@ -8,4 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Pesanan extends Model
 {
     use HasFactory;
+
+    protected $table = 'pesanans';
+    protected $fillable = [
+        'user_id',
+        'paket_id',
+        'nama_pelanggan',
+        'berat_kg',
+        'tanggal_pesan',
+        'tanggal_selesai',
+        'status',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function paket()
+    {
+        return $this->belongsTo(Pakets::class);
+    }
 }

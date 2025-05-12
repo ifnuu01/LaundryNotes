@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('layanan_id')->constrained('pakets')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('paket_id')->constrained('pakets');
             $table->string('nama_pelanggan');
             $table->float('berat_kg');
             $table->date('tanggal_pesan');

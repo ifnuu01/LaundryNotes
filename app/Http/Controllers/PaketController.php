@@ -12,8 +12,9 @@ class PaketController extends Controller
      */
     public function index()
     {
-        $paket = Pakets::all();
-        return view('layanan.list-layanan', compact('paket'));
+        $pakets = Pakets::all();
+        // dd($pakets);
+        return view('layanan.list-layanan', compact('pakets'));
     }
 
     /**
@@ -32,50 +33,58 @@ class PaketController extends Controller
         $request->validate([
             'nama' => 'required|string|max:100',
             'harga_per_kg' => 'required|numeric',
-            'status' => 'required',
         ]);
 
         Pakets::create([
             'nama' => $request->nama,
             'harga_per_kg' => $request->harga_per_kg,
-            'status' => $request->status,
+            'status' => 'aktif',
             'catatan' => $request->catatan,
         ]);
 
-        return redirect()->route('layanan.list-layanan')->with('success', 'Paket berhasil ditambahkan');
+        return redirect()->route('layanan.index')->with('success', 'Paket berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Pakets $paket)
+    public function show($id)
     {
+        $paket = Pakets::find($id);
         if (!$paket) {
-            return redirect()->route('layanan.list-layanan')->with('error', 'Data tidak ditemukan');
+            return redirect()->route('layanan.index')->with('error', 'Data tidak ditemukan');
         }
+        // dd($paket);
         return view('layanan.detail', compact('paket'));
     }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pakets $paket)
+    public function edit($id)
     {
+        $paket = Pakets::find($id);
         if (!$paket) {
-            return redirect()->route('layanan.list-layanan')->with('error', 'Data tidak ditemukan');
+            return redirect()->route('layanan.index')->with('error', 'Data tidak ditemukan');
         }
+        // dd($paket);
         return view('layanan.edit', compact('paket'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pakets $paket)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama' => 'required|string|max:100',
             'harga_per_kg' => 'required|numeric',
             'status' => 'required',
         ]);
+
+        $paket = Pakets::find($id);
+        if (!$paket) {
+            return redirect()->route('layanan.index')->with('error', 'Data tidak ditemukan');
+        }
 
         $paket->update([
             'nama' => $request->nama,
@@ -84,18 +93,19 @@ class PaketController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        return redirect()->route('layanan.list-layanan')->with('success', 'Paket berhasil diperbarui');
+        return redirect()->route('layanan.index')->with('success', 'Paket berhasil diperbarui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pakets $paket)
+    public function destroy($id)
     {
+        $paket = Pakets::find($id);
         if (!$paket) {
-            return redirect()->route('layanan.list-layanan')->with('error', 'Data tidak ditemukan');
+            return redirect()->route('layanan.index')->with('error', 'Data tidak ditemukan');
         }
         $paket->delete();
-        return redirect()->route('layanan.list-layanan')->with('success', 'Paket berhasil dihapus');
+        return redirect()->route('layanan.index')->with('success', 'Paket berhasil dihapus');
     }
 }

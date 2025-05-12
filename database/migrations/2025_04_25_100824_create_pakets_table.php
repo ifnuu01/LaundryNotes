@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('harga_per_kg', 10, 2);
             $table->enum('status', ['aktif', 'nonaktif']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

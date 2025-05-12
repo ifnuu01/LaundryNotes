@@ -10,14 +10,9 @@
 </div>
 
 <div class="mt-4">
-    <form action="">
-        <x-input-with-icon
-            type="text"
-            name="nama_kasir"
-            label="Nama Kasir"
-            placeholder="Nama Kasir"
-            icon="material-symbols:person-outline"
-        />
+    <form action="{{ route('pesanan.store') }}" method="POST" >
+        @method('POST')
+        @csrf
         <x-input-with-icon
             type="text"
             name="nama_pelanggan"
@@ -28,19 +23,20 @@
         <div class="flex gap-4">
             <x-input-with-icon
                 type="number"
-                name="berat_cucian"
+                name="berat_kg"
                 label="Berat Cucian"
                 placeholder="Berat Cucian"
                 icon="mdi:weight-kilogram"
             />
             <x-select-with-icon
-                name="layanan"
+                name="id_paket"
                 label="Paket Layanan"
                 icon="material-symbols:local-laundry-service-outline"
                 placeholder="Nama Layanan"
             >
-                <option value="reguler">Paket Reguler</option>
-                <option value="express">Paket Express</option>
+                @foreach($pakets as $paket)
+                    <option value="{{ $paket->id }}">{{ $paket->nama}}</option>
+                @endforeach
             </x-select-with-icon>
         </div>
         <x-input-with-icon
@@ -49,13 +45,6 @@
                 label="Catatan"
                 placeholder="Catatan"
                 icon="material-symbols:note-outline"
-            />
-        <x-input-with-icon
-                type="number"
-                name="harga"
-                label="Harga"
-                placeholder="Harga"
-                icon="tdesign:money"
             />
         <div class="flex gap-4 mt-4">
             <x-button text="Tambah Pesanan" icon="ic:baseline-plus"/>

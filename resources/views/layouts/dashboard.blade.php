@@ -33,7 +33,7 @@
                         <span class="block text-sm font-semibold py-2">Riwayat Pesanan</span>
                     </a>
                 </div>
-            
+            @if(Auth::user()->role === 'admin')
                 <p class="text-fg text-sm mb-2 font-semibold">Master Data</p>
                 <div class="ml-2 flex flex-col gap-y-1">
                     <a href="{{ route('layanan.index') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/layanan*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
@@ -64,7 +64,9 @@
                         <iconify-icon icon="gg:profile" width="24" height="24"></iconify-icon>
                         <span class="block text-sm font-semibold py-2">Kinerja Kasir</span>
                     </a>
+
                 </div>
+            @endif
             </nav>
             
           </aside>
@@ -76,7 +78,10 @@
                     <p class="text-sm text-fg">Selasa, 18 Maret 2025</p>
                 </div>
                 <div>
-                    <x-button width="w-full" text="Keluar" icon="material-symbols:logout"/>
+                    <form action="{{route('logout')}}" method="POST">
+                        @csrf
+                        <x-button text="Keluar" type="submit" icon="ic:baseline-logout"/>
+                    </form>
                 </div>
             </div>
             <div class="bg-white p-6 rounded-md shadow-sm mt-12 animate-fade-right">

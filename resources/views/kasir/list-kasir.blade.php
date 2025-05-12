@@ -50,7 +50,7 @@
         <h2 class="text-lg font-semibold text-fg">Daftar Kasir</h2>
         <p class="text-fg text-sm">Menampilkan semua kasir pada sistem LaundryNotes</p>
     </div>
-    <x-button text="Tambah Paket" type="button" href="{{route('kasir.create')}}" asLink="true" icon="ic:baseline-plus"/>
+    <x-button text="Tambah Akun Kasir" type="button" href="{{route('kasir.create')}}" asLink="true" icon="ic:baseline-plus"/>
 </div>
 
 <div class="mt-4">

@@ -50,7 +50,7 @@
         <h2 class="text-lg font-semibold text-fg">Daftar Paket Layanan</h2>
         <p class="text-fg text-sm">Menampilkan semua paket layanan pada sistem LaundryNotes</p>
     </div>
-    <x-button text="Tambah Paket" type="button" href="{{route('layanan.create')}}" asLink="true" icon="ic:baseline-plus"/>
+    <x-button text="Tambah Layanan" type="button" href="{{route('layanan.create')}}" asLink="true" icon="ic:baseline-plus"/>
 </div>
 
 <div class="mt-4">

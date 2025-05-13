@@ -13,8 +13,8 @@ class PesananController extends Controller
      */
     public function index()
     {
-        $pesanan = Pesanan::all();
-        return view('pesanan.list-pesanan', compact('pesanan'));
+        $pesanans = Pesanan::all();
+        return view('pesanan.list-pesanan', compact('pesanans'));
     }
 
     /**
@@ -31,20 +31,21 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'nama_pelanggan' => 'required|string|max:100|',
             'berat_kg' => 'required|numeric',
-            'status' => 'required',
             'catatan' => 'nullable|string|max:5000',
+            'paket_id' => 'required|exists:pakets,id',
         ]);
 
         Pesanan::create([
             'nama_pelanggan' => $request->nama_pelanggan,
             'berat_kg' => $request->berat_kg,
-            'id_paket' => $request->id_paket,
-            'tanggal_pesan' => time(),
-            'tanggal_selesai' => $request->tanggal_selesai,
-            'status' => "proses",
+            'user_id' => auth()->user()->id,
+            'paket_id' => $request->paket_id,
+            'tanggal_pesan' => now()->toDateString(),
+            'status' => "Proses",
             'catatan' => $request->catatan,
         ]);
 
@@ -54,47 +55,60 @@ class PesananController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pesanan $pesanan)
+    public function show($id)
     {
+        $pesanan = Pesanan::find($id);
         if (!$pesanan) {
             return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
         }
-        return view('pesanan.detail', compact('pesanan'));
+        // harga total
+        $paket = Pakets::find($pesanan->paket_id);
+        $harga_total = $paket->harga_per_kg * $pesanan->berat_kg;
+        return view('pesanan.detail', compact('pesanan', 'harga_total'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pesanan $pesanan)
+    public function edit($id)
     {
+        $pesanan = Pesanan::find($id);
         if (!$pesanan) {
             return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
         }
-        $paket = Pakets::all();
-        return view('pesanan.edit', compact('pesanan', 'paket'));
+        $pakets = Pakets::all();
+        // harga total
+        $harga_total = $pesanan->paket->harga_per_kg * $pesanan->berat_kg;
+        return view('pesanan.edit', compact('pesanan', 'pakets', 'harga_total'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pesanan $pesanan)
+    public function update(Request $request, $id)
     {
+        $pesanan = Pesanan::find($id);
+        if (!$pesanan) {
+            return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
+        }
+
+        // dd($request->all());
         $request->validate([
             'nama_pelanggan' => 'required|string|max:100|',
             'berat_kg' => 'required|numeric',
-            'tanggal_pesan' => 'required|date',
-            'tanggal_selesai' => 'required|date',
-            'status' => 'required',
             'catatan' => 'nullable|string|max:5000',
+            'paket_id' => 'required|exists:pakets,id',
+            'status' => 'required|in:Proses,Selesai,Dibatalkan',
         ]);
 
         $pesanan->update([
             'nama_pelanggan' => $request->nama_pelanggan,
             'berat_kg' => $request->berat_kg,
-            'tanggal_pesan' => $request->tanggal_pesan,
-            'tanggal_selesai' => $request->tanggal_selesai,
+            'user_id' => auth()->user()->id,
+            'paket_id' => $request->paket_id,
             'status' => $request->status,
             'catatan' => $request->catatan,
+            'tanggal_selesai' => $request->status == 'Selesai' || $request->status == 'Dibatalkan' ? now()->toDateString() : null,
         ]);
 
         return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil diperbarui');
@@ -103,12 +117,12 @@ class PesananController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pesanan $pesanan)
+    public function destroy($id)
     {
+        $pesanan = Pesanan::find($id);
         if (!$pesanan) {
             return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
         }
-
         $pesanan->delete();
         return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dihapus');
     }

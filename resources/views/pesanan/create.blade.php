@@ -19,6 +19,7 @@
             label="Nama Pelanggan"
             placeholder="Nama Pelanggan"
             icon="ic:baseline-person-add"
+            value="{{ old('nama_pelanggan') }}"
         />
         <div class="flex gap-4">
             <x-input-with-icon
@@ -27,9 +28,10 @@
                 label="Berat Cucian"
                 placeholder="Berat Cucian"
                 icon="mdi:weight-kilogram"
+                value="{{ old('berat_kg') }}"
             />
             <x-select-with-icon
-                name="id_paket"
+                name="paket_id"
                 label="Paket Layanan"
                 icon="material-symbols:local-laundry-service-outline"
                 placeholder="Nama Layanan"
@@ -45,10 +47,11 @@
                 label="Catatan"
                 placeholder="Catatan"
                 icon="material-symbols:note-outline"
+                value="{{ old('catatan') }}"
             />
         <div class="flex gap-4 mt-4">
-            <x-button text="Tambah Pesanan" icon="ic:baseline-plus"/>
-            <x-button text="Kembali" type="button" href="#" asLink="true" icon="mingcute:back-fill"/>
+            <x-button text="Tambah Pesanan" type="submit" icon="ic:baseline-plus"/>
+            <x-button text="Kembali" type="button" href="{{route('pesanan.index')}}" asLink="true" icon="mingcute:back-fill" baseStyle="0"/>
         </div>
     </form>
 </div>

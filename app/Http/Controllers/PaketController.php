@@ -38,7 +38,7 @@ class PaketController extends Controller
         Pakets::create([
             'nama' => $request->nama,
             'harga_per_kg' => $request->harga_per_kg,
-            'status' => 'aktif',
+            'status' => 'Aktif',
             'catatan' => $request->catatan,
         ]);
 

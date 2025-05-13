@@ -12,13 +12,15 @@
 <div class="mt-4">
     <form action="">
         <div class="flex gap-4">
-            <div class="w-1/2">
+            <div class="w-full">
                 <x-input-with-icon
                 type="text"
                 name="nama_kasir"
                 label="Nama Kasir"
                 placeholder="Nama Kasir"
                 icon="material-symbols:person-outline"
+                value="{{ $pesanan->user->nama }}"
+                disabled
             />
             <x-input-with-icon
                 type="text"
@@ -26,6 +28,8 @@
                 label="Nama Pelanggan"
                 placeholder="Nama Pelanggan"
                 icon="ic:baseline-person-add"
+                value="{{ $pesanan->nama_pelanggan }}"
+                disabled
             />
             <div class="flex gap-4">
                 <x-input-with-icon
@@ -34,16 +38,18 @@
                     label="Berat Cucian"
                     placeholder="Berat Cucian"
                     icon="mdi:weight-kilogram"
+                    value="{{ $pesanan->berat_kg }}"
+                    disabled
                 />
-                <x-select-with-icon
-                    name="layanan"
-                    label="Paket Layanan"
+                <x-input-with-icon
+                    type="text"
+                    name="status"
+                    label="Status"
+                    placeholder="Status"
                     icon="material-symbols:local-laundry-service-outline"
-                    placeholder="Nama Layanan"
-                >
-                    <option value="reguler">Paket Reguler</option>
-                    <option value="express">Paket Express</option>
-                </x-select-with-icon>
+                    value="{{ $pesanan->status }}"
+                    disabled
+                />
             </div>
             <x-input-with-icon
                     type="text"
@@ -51,24 +57,23 @@
                     label="Catatan"
                     placeholder="Catatan"
                     icon="material-symbols:note-outline"
+                    value="{{ $pesanan->catatan }}"
+                    disabled
                 />
             <x-input-with-icon
-                    type="number"
+                    type="text"
                     name="harga"
-                    label="Harga"
+                    label="Harga Total"
                     placeholder="Harga"
                     icon="tdesign:money"
-                /></div>
-            <div>
-                <span class="block mt-4 text-sm text-fg">Struk Pesanan</span>
-                <div class="border border-skyBlue rounded-md p-4 mt-1 w-full h-64 flex justify-center items-center">
-                    
-                </div>
+                    value="Rp {{ number_format($harga_total, 0, ',', '.') }}"
+                    disabled
+                />
             </div>
         </div>
         <div class="flex gap-4 mt-4 w-full justify-center items-center">
             <x-button text="Cetak Detail" icon="material-symbols:print-outline"/>
-            <x-button text="Kembali" type="button" href="#" asLink="true" icon="mingcute:back-fill"/>
+            <x-button text="Kembali" type="button" href="{{route('pesanan.index')}}" asLink="true" icon="mingcute:back-fill" baseStyle="0"/>
         </div>
     </form>
 </div>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\RiwayatController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\TransaksiController;
 
 
 Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
+    Route::get('/dashboard', [BerandaController::class, 'index'])->name('dashboard');
     Route::resource('dashboard/pesanan', PesananController::class);
     Route::resource('dashboard/riwayat', RiwayatController::class);
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');

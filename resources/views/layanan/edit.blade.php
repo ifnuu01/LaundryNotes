@@ -42,8 +42,8 @@
                 label="Status Paket"
                 icon="material-symbols:local-laundry-service-outline"
             >
-                <option value="aktif" {{ $paket->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                <option value="nonaktif" {{ $paket->status == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                <option value="Aktif" {{ $paket->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                <option value="Nonaktif" {{ $paket->status == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
         </x-select-with-icon>
         <div class="flex gap-4 mt-4">
             <x-button text="Ubah Paket" type="submit" icon="tabler:edit"/>

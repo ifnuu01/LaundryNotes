@@ -9,6 +9,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
+            $.fn.dataTable.ext.errMode = 'none';
             $('#pesananTable').DataTable({
                 language: {
                     searchPlaceholder: "Cari data...",
@@ -26,11 +27,11 @@
                     },
                 },
                 dom:
-                    "<'flex justify-between items-center mb-4'f<'text-sm' l>>" +
-                    "<'overflow-x-auto't>" +
-                    "<'flex justify-between items-center mt-4'i<'text-sm' p>>"   
+                "<'flex justify-between items-center mb-4'f<'text-sm' l>>" +
+                "<'overflow-x-auto't>" +
+                "<'flex justify-between items-center mt-4'i<'text-sm' p>>"   
             });
-
+            
             const searchInput = document.querySelector('#pesananTable_filter input');
             if (searchInput) {
                 searchInput.classList.add(

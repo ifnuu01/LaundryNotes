@@ -9,6 +9,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
+            $.fn.dataTable.ext.errMode = 'none';
             $('#pesananTable').DataTable({
                 language: {
                     searchPlaceholder: "Cari data...",
@@ -69,9 +70,9 @@
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $paket->nama}}</td>
-                    <td>{{ $paket->harga_per_kg }} kg</td>
+                    <td>Rp {{ number_format($paket->harga_per_kg, 2, ',', '.') }}</td>
                     <td>
-                        <span class="inline-block px-3 py-1 text-sm rounded-full capitalize {{ $paket->status == 'aktif' ? 'bg-success text-successDark' : 'bg-danger text-dangerDark' }}">
+                        <span class="inline-block px-3 py-1 text-sm rounded-full capitalize {{ $paket->status == 'Aktif' ? 'bg-success text-successDark' : 'bg-danger text-dangerDark' }}">
                             {{ $paket->status }}
                         </span>
                     </td>

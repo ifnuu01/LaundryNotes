@@ -9,6 +9,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
+            $.fn.dataTable.ext.errMode = 'none';
             $('#pesananTable').DataTable({
                 language: {
                     searchPlaceholder: "Cari data...",
@@ -58,9 +59,6 @@
             <tr class="text-fg font-semibold">
                 <th>No</th>
                 <th>Nama Pelanggan</th>
-                <th>Nama Kasir</th>
-                <th>Jenis Paket</th>
-                <th>Berat</th>
                 <th>Status</th>
                 <th>Tanggal Pesanan</th>
                 <th>Tanggal Selesai</th>
@@ -68,57 +66,39 @@
             </tr>
         </thead>
         <tbody class="[&>tr:nth-child(even)]:bg-skyBlue">
-            <tr>
-                <td>1</td>
-                <td>Konco Konco</td>
-                <td>Awewe</td>
-                <td>Paket Reguler</td>
-                <td>5 kg</td>
-                <td>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-success text-successDark">
-                        Selesai
-                    </span>
-                </td>
-                <td>2023-10-01</td>
-                <td>2023-10-02</td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Mary Jane</td>
-                <td>Ucup</td>
-                <td>Paket Express</td>
-                <td>10 kg</td>
-                <td>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-warning text-warningDark">
-                        Proses
-                    </span>
-                </td>
-                <td>2023-10-03</td>
-                <td>2023-10-04</td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Peter Parker</td>
-                <td>Joni</td>
-                <td>Paket Reguler</td>
-                <td>7 kg</td>
-                <td>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-success text-successDark">
-                        Selesai
-                    </span>
-                </td>
-                <td>2023-10-05</td>
-                <td>2023-10-06</td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
+            {{-- {{dd($riwayats)}} --}}
+            @forelse ($riwayats as $index => $riwayat)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $riwayat->nama_pelanggan }}</td>
+                    <td>
+                        @if ($riwayat->status == 'Proses')
+                            <span class="inline-block px-3 py-1 text-sm rounded-full bg-warning text-warningDark">
+                                Proses
+                            </span>
+                        @elseif ($riwayat->status == 'Selesai')
+                            <span class="inline-block px-3 py-1 text-sm rounded-full bg-success text-successDark">
+                                Selesai
+                            </span>
+                        @else
+                            <span class="inline-block px-3 py-1 text-sm rounded-full bg-danger text-dangerDark">
+                                Dibatalkan
+                            </span>
+                        @endif
+                    </td>
+                    <td>{{ $riwayat->created_at->format('Y-m-d') }}</td>
+                    <td>{{ $riwayat->updated_at->format('Y-m-d') }}</td>
+                    <td class="flex gap-2">
+                        <x-button type="button" href="{{ route('riwayat.show', $riwayat->id) }}" asLink="true" icon="iconoir:eye-solid"/>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center text-fg font-semibold">
+                        Tidak ada riwayat pesanan
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

@@ -27,12 +27,12 @@
         disabled
     />
     <x-input-with-icon
-        type="number"
+        type="text"
         name="harga"
         label="Harga"
         placeholder="Harga"
         icon="tdesign:money"
-        value="{{$paket->harga_per_kg}}"
+        value="Rp {{ number_format($paket->harga_per_kg, 2, ',', '.') }}"
         disabled
     />
     <x-input-with-icon

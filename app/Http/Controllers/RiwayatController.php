@@ -12,8 +12,12 @@ class RiwayatController extends Controller
      */
     public function index()
     {
-        $pesanan = Pesanan::where('status', 'selesai')->get();
-        return view('riwayat.list-riwayat', compact('pesanan'));
+        // pesanan dengan status selesai Proses berarti ada Selesai dan Dibatalkan
+        $riwayats = Pesanan::where('user_id', auth()->user()->id)
+            ->whereIn('status', ['Selesai', 'Dibatalkan'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('riwayat.list-riwayat', compact('riwayats'));
     }
 
     /**
@@ -35,12 +39,15 @@ class RiwayatController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pesanan $pesanan)
+    public function show($id)
     {
-        if (!$pesanan) {
+        $riwayat = Pesanan::find($id);
+        if (!$riwayat) {
             return redirect()->route('riwayat.list-riwayat')->with('error', 'Data tidak ditemukan');
         }
-        return view('riwayat.detail', compact('pesanan'));
+
+        $harga_total = $riwayat->paket->harga_per_kg * $riwayat->berat_kg;
+        return view('riwayat.detail', compact('riwayat', 'harga_total'));
     }
 
     /**

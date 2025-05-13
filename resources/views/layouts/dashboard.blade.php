@@ -20,7 +20,7 @@
             <nav class="space-y-4 text-fg mt-4">
                 <p class="text-fg text-sm mb-2 font-semibold">Dashboard</p>
                 <div class="ml-2 flex flex-col gap-y-1">
-                    <a href="#" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
                         <iconify-icon icon="material-symbols:dashboard-outline" width="24" height="24"></iconify-icon>
                         <span class="block text-sm font-semibold py-2">Beranda</span>
                     </a>
@@ -72,10 +72,10 @@
           </aside>
 
           <main class="flex-1 p-6 ml-64 overflow-hidden">
-            <div class="mb-6 flex justify-between items-center">
+            <div class="mb-6 flex justify-between items-center fixed top-0 left-[262px] right-0 p-4 z-10">
                 <div>
-                    <h1 class="text-lg text-fg font-semibold">Selamat Datang, Syifai Matcha</h1>
-                    <p class="text-sm text-fg">Selasa, 18 Maret 2025</p>
+                    <h1 class="text-lg text-fg font-semibold capitalize">Selamat Datang, {{Auth::user()->nama}}</h1>
+                    <p class="text-sm text-fg">{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
                 </div>
                 <div>
                     <form action="{{route('logout')}}" method="POST">
@@ -84,7 +84,7 @@
                     </form>
                 </div>
             </div>
-            <div class="bg-white p-6 rounded-md shadow-sm mt-12 animate-fade-right">
+            <div class="bg-white p-6 rounded-md shadow-sm mt-16 animate-fade-up">
               @yield('content')
             </div>
           </main>

@@ -37,7 +37,7 @@
         
         <div class="flex gap-4 mt-4">
             <x-button text="Tambah Paket" type="submit" icon="ic:baseline-plus"/>
-            <x-button text="Kembali" type="button" href="{{route('layanan.index')}}" asLink="true" icon="mingcute:back-fill"/>
+            <x-button text="Kembali" type="button" href="{{route('layanan.index')}}" asLink="true" icon="mingcute:back-fill" baseStyle="0"/>
         </div>
     </form>
 </div>

@@ -8,20 +8,20 @@
         @if($icon)
             <iconify-icon icon="{{ $icon }}" width="20" height="20"></iconify-icon>
         @endif
-        <span>{{ $text }}</span>
+        <span class="{{ $text ? 'ml-2' : '' }}">{{ $text }}</span>
     </a>
 @elseif($type)
     <button type="{{ $type }}" class="{{ $baseClass }}" data-id="{{ $dataId}}">
         @if($icon)
             <iconify-icon icon="{{ $icon }}" width="20" height="20"></iconify-icon>
         @endif
-        <span>{{ $text }}</span>
+        <span class="{{ $text ? 'ml-2' : '' }}">{{ $text }}</span>
     </button>
 @else
     <div class="{{ $baseClass }}">
         @if($icon)
             <iconify-icon icon="{{ $icon }}" width="20" height="20"></iconify-icon>
         @endif
-        <span>{{ $text }}</span>
+        <span class="{{ $text ? 'ml-2' : '' }}">{{ $text }}</span>
     </div>
 @endif

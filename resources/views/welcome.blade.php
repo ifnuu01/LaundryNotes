@@ -62,7 +62,7 @@
         <div class="flex flex-col gap-4 bg-transparent z-20 h-[400px] justify-center animate-fade-left">
             <h1 class="text-2xl md:text-5xl font-bold text-fg">Kalau bukan hari ini <b class="text-skyBlueDark">cucinya</b>, besok siap-siap tanpa baju.</h1>
             <p class="text-base md:text-lg text-fg">Cuci, kering, lipat. Hemat waktu, hemat biaya. Antar-jemput? Siap!</p>
-            <a href="" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-full">Bagaimana Cara Kerjanya?</a>
+            <a href="#caraKerja" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-full">Bagaimana Cara Kerjanya?</a>
         </div>
         <div class="hidden md:block animate-fade-right">
             <img src="{{asset('images/cucianGelembung.svg')}}" class="w-[400px] md:w-[650px]" alt="">

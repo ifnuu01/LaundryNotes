@@ -26,7 +26,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('success', 'Berhasil Login');
         } else {
             return redirect()->route('login')->with("failed", 'Email atau password salah');
         }

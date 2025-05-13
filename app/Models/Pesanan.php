@@ -23,10 +23,10 @@ class Pesanan extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
     public function paket()
     {
-        return $this->belongsTo(Pakets::class);
+        return $this->belongsTo(Pakets::class)->withTrashed();
     }
 }

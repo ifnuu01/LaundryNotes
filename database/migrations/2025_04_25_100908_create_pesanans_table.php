@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('berat_kg');
             $table->date('tanggal_pesan');
             $table->date('tanggal_selesai')->nullable();
-            $table->enum('status', ['proses', 'selesai']);
+            $table->enum('status', ['Proses', 'Selesai', 'Dibatalkan'])->default('Proses');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });

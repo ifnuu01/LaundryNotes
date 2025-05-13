@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('catatan')->nullable();
             $table->decimal('harga_per_kg', 10, 2);
-            $table->enum('status', ['aktif', 'nonaktif']);
+            $table->enum('status', ['Aktif', 'Nonaktif']);
             $table->timestamps();
             $table->softDeletes();
         });

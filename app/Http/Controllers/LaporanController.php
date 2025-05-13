@@ -14,7 +14,7 @@ class LaporanController extends Controller
                 DB::raw('COUNT(*) as jumlah_pesanan')
             )
             ->where('status', 'selesai')
-            ->where('tanggal_selesai', '>=', now()->subYear())
+            // ->where('tanggal_selesai', '>=', now()->subYear())
             ->groupBy(DB::raw('MONTH(tanggal_selesai)'))
             ->get();
 
@@ -37,14 +37,17 @@ class LaporanController extends Controller
 
     public function paketTerlaris()
     {
-        $paketTerlaris = Pesanan::select('paket_id', DB::raw('COUNT(*) as jumlah'))
+        $paketTerlaris = Pesanan::select('paket_id', DB::raw('COUNT(*) as jumlah_dipesan'), 
+         'pakets.nama as nama'   
+        )
             ->groupBy('paket_id')
-            ->orderByDesc('jumlah')
-            ->with('paket')
+            ->orderByDesc('jumlah_dipesan')
+            ->join('pakets', 'pesanans.paket_id', '=', 'pakets.id')
+            ->where('pesanans.status', 'selesai')
             ->take(5)
             ->get();
 
-        return view('laporan.paket_terlaris', compact('paketTerlaris'));
+        return view('laporan.paket-terlaris', compact('paketTerlaris'));
     }
 
     public function kinerjaKasir()

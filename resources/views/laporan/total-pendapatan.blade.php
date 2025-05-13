@@ -69,7 +69,7 @@
             @foreach($pendapatan as $index => $item)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $item->bulan }}</td>
+                <td>{{ \Carbon\Carbon::create()->month($item->bulan)->locale('id')->monthName }} </td>
                 <td>Rp {{ number_format($item->total_pendapatan, 0, ',', '.') }}</td>
             </tr>
             @endforeach

@@ -66,21 +66,13 @@
             </tr>
         </thead>
         <tbody class="[&>tr:nth-child(even)]:bg-skyBlue">
+            @foreach($paketTerlaris as $index => $item)
             <tr>
-                <td>1</td>
-                <td>Cuci</td>
-                <td>120</td>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $item->nama}}</td>
+                <td>{{ $item->jumlah_dipesan }}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Cuci</td>
-                <td>120</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Cuci</td>
-                <td>120</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

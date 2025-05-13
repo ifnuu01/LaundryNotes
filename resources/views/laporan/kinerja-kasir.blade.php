@@ -67,12 +67,15 @@
             </tr>
         </thead>
         <tbody class="[&>tr:nth-child(even)]:bg-skyBlue">
-                <td>1</td>
-                <td>Ucup</td>
-                <td>120</td>
-                <td>Rp 20.000.000</td>
-            </tr>
+            @foreach($kinerjaKasir as $index => $item)
             <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $item->nama_kasir }}</td>
+                <td>{{ $item->jumlah_pesanan }}</td>
+                <td>Rp {{ number_format($item->total_pendapatan, 0, ',', '.') }}</td>
+            </tr>
+            @endforeach
+            {{-- <tr>
                 <td>2</td>
                 <td>Ucup</td>
                 <td>120</td>
@@ -83,7 +86,7 @@
                 <td>Ucup</td>
                 <td>120</td>
                 <td>Rp 20.000.000</td>
-            </tr>
+            </tr> --}}
         </tbody>
     </table>
 </div>

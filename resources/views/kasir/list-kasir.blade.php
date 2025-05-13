@@ -9,6 +9,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
+            $.fn.dataTable.ext.errMode = 'none';
             $('#pesananTable').DataTable({
                 language: {
                     searchPlaceholder: "Cari data...",
@@ -26,11 +27,11 @@
                     },
                 },
                 dom:
-                    "<'flex justify-between items-center mb-4'f<'text-sm' l>>" +
-                    "<'overflow-x-auto't>" +
-                    "<'flex justify-between items-center mt-4'i<'text-sm' p>>"   
+                "<'flex justify-between items-center mb-4'f<'text-sm' l>>" +
+                "<'overflow-x-auto't>" +
+                "<'flex justify-between items-center mt-4'i<'text-sm' p>>"   
             });
-
+            
             const searchInput = document.querySelector('#pesananTable_filter input');
             if (searchInput) {
                 searchInput.classList.add(
@@ -48,12 +49,9 @@
 <div class="flex justify-between items-center mb-4">
     <div class="flex flex-col gap-2">
         <h2 class="text-lg font-semibold text-fg">Daftar Kasir</h2>
-        <p class="text-fg text-sm">Menampilkan semua kasri pada sistem LaundryNotes</p>
+        <p class="text-fg text-sm">Menampilkan semua kasir pada sistem LaundryNotes</p>
     </div>
-    <button class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">
-        <iconify-icon icon="ic:baseline-plus" width="20" height="20"></iconify-icon>
-        <span>Tambah</span>
-    </button>
+    <x-button text="Tambah Akun Kasir" type="button" href="{{route('kasir.create')}}" asLink="true" icon="ic:baseline-plus"/>
 </div>
 
 <div class="mt-4">
@@ -67,36 +65,30 @@
             </tr>
         </thead>
         <tbody class="[&>tr:nth-child(even)]:bg-skyBlue">
-            <tr>
-                <td>1</td>
-                <td>Konco Konco</td>
-                <td>email@email.com</td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-blueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:edit" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-danger text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:trash" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Mary Jane</td>
-                <td>email@email.com</td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-blueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:edit" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-danger text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:trash" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Peter Parker</td>
-                <td>email@email.com</td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-blueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:edit" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-danger text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:trash" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
+            @forelse ($users as $index => $user)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $user->nama }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td class="flex gap-2">
+                        <x-button color="bg-blueDark" type="button" href="{{ route('kasir.edit', $user->id) }}" asLink="true" icon="tabler:edit"/>
+                        <form id="delete-form-{{ $user->id }}" action="{{ route('kasir.destroy', $user->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <x-button 
+                                color="bg-danger btn-delete" 
+                                type="button" 
+                                icon="tabler:trash"
+                                dataId="{{ $user->id }}"
+                            />
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center text-fg">Tidak ada data kasir</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

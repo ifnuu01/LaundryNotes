@@ -10,10 +10,12 @@
 </div>
 
 <div class="mt-4">
-    <form action="">
+    <form action="{{route('kasir.store')}}" method="POST">
+        @method('POST')
+        @csrf
         <x-input-with-icon
             type="text"
-            name="nama_kasir"
+            name="nama"
             label="Nama Kasir"
             placeholder="Nama Kasir"
             icon="material-symbols:person-outline"
@@ -33,8 +35,8 @@
             icon="mdi:password-outline"
         />
         <div class="flex gap-4 mt-4">
-            <x-button text="Tambah Kasir" icon="ic:baseline-plus"/>
-            <x-button text="Kembali" type="button" href="#" asLink="true" icon="mingcute:back-fill"/>
+            <x-button text="Tambah Kasir" type="submit" icon="ic:baseline-plus"/>
+            <x-button text="Kembali" type="button" href="{{route('kasir.index')}}" asLink="true" icon="mingcute:back-fill" baseStyle="0"/>
         </div>
     </form>
 </div>

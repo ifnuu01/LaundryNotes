@@ -62,7 +62,7 @@
         <div class="flex flex-col gap-4 bg-transparent z-20 h-[400px] justify-center animate-fade-left">
             <h1 class="text-2xl md:text-5xl font-bold text-fg">Kalau bukan hari ini <b class="text-skyBlueDark">cucinya</b>, besok siap-siap tanpa baju.</h1>
             <p class="text-base md:text-lg text-fg">Cuci, kering, lipat. Hemat waktu, hemat biaya. Antar-jemput? Siap!</p>
-            <a href="" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-full">Bagaimana Cara Kerjanya?</a>
+            <a href="#caraKerja" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-full">Bagaimana Cara Kerjanya?</a>
         </div>
         <div class="hidden md:block animate-fade-right">
             <img src="{{asset('images/cucianGelembung.svg')}}" class="w-[400px] md:w-[650px]" alt="">
@@ -75,24 +75,24 @@
         <h1 data-aos="zoom-in" data-aos-duration="1000" class="text-2xl md:text-5xl font-bold text-fg">Selesai dalam 4 tahap</h1>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
             <div data-aos="fade-up" data-aos-duration="2000" class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
-                <p class="text-skyBlueDark">Langakh 1</p>
+                <p class="text-skyBlueDark">Langkah 1</p>
                 <h1 class="text-xl md:text-4xl font-bold text-fg">Penjemputan</h1>
-                <img src="{{asset('images/address.svg')}}" alt="">
+                <img src="{{asset('images/address.svg')}}" alt="" class="w-[200px] md:w-[300px] h-[150px] md:h-[200px]">
             </div>
-            <div data-aos="fade-up" data-aos-duration="2000" class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
-                <p class="text-skyBlueDark">Langakh 2</p>
+            <div data-aos="fade-up" data-aos-duration="2000" class="bg-bg flex flex-col gap-1 lg:gap-0 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
+                <p class="text-skyBlueDark">Langkah 2</p>
                 <h1 class="text-xl md:text-4xl font-bold text-fg text-center">Cuci & Keringkan</h1>
-                <img src="{{asset('images/mesinCuci.svg')}}" alt="">
+                <img src="{{asset('images/mesinCuci.svg')}}" alt="" class="w-[200px] md:w-[300px] h-[150px] md:h-[200px]">
             </div>
             <div data-aos="fade-up" data-aos-duration="2000" class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
-                <p class="text-skyBlueDark">Langakh 1</p>
+                <p class="text-skyBlueDark">Langkah 3</p>
                 <h1 class="text-xl md:text-4xl font-bold text-fg">Lipat</h1>
-                <img src="{{asset('images/mesinPakaian.svg')}}" alt="">
+                <img src="{{asset('images/mesinPakaian.svg')}}" alt="" class="w-[200px] md:w-[300px] h-[150px] md:h-[200px]">
             </div>
             <div data-aos="fade-up" data-aos-duration="2000" class="bg-bg flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md">
-                <p class="text-skyBlueDark">Langakh 1</p>
+                <p class="text-skyBlueDark">Langkah 4</p>
                 <h1 class="text-xl md:text-4xl font-bold text-fg">Pengantaran</h1>
-                <img src="{{asset('images/pesanOrang.svg')}}" alt="">
+                <img src="{{asset('images/pesanOrang.svg')}}" alt="" class="w-[200px] md:w-[300px] h-[150px] md:h-[200px]">
             </div>
         </div>
     </section>
@@ -120,7 +120,7 @@
                 </div>
                 <button  class="bg-skyBlueDark w-full text-white font-semibold p-4 mt-4 rounded-full">Rp 7.000/Kg</button>
             </div>
-            <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-skyBlue">
+            <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col gap-4 lg:gap-2 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-skyBlue">
                 <h1 class="text-4xl text-skyBlueDark font-bold">Paket Express</h1>
                 <p class="text-fg">Benefit:</p>
                 <div class="mt-4 flex flex-col gap-2 w-full">
@@ -164,7 +164,11 @@
     <section data-aos="zoom-in" data-aos-duration="2000" class="py-10 px-6 md:px-44 flex justify-center items-center gap-4">
         <div class="bg-skyBlueDark w-full rounded-lg shadow-md flex flex-col gap-4 p-6 md:p-10 justify-center items-center">
             <h1 class="text-2xl md:text-5xl font-bold text-white text-center">Cucian numpuk? <br> Kami yang beresin!</h1>
-            <button  class="bg-white w-fit text-skyBlueDark font-semibold px-6 py-4 mt-4 rounded-full">Laundry Sekarang</button>
+            <a 
+             href="https://wa.me/6289501603099?text=Halo%20LaundryNotes,%20saya%20ingin%20laundry%20sekarang!"
+             target="_blank"
+             data-aos="fade-up" data-aos-duration="2000"
+             class="bg-white w-fit text-skyBlueDark font-semibold px-6 py-4 mt-4 rounded-full">Laundry Sekarang</a>
         </div>
     </section>
 
@@ -196,7 +200,7 @@
             </div>
         </div>
         <p class="text-sm mt-4 text-gray-700">
-            © 2025 <strong>LaundryNotes</strong>. Seluruh hak cipta dilindungi. Dikembangkan oleh Kelompok 8 Basis Data Lanjut.
+            © 2025 <strong>LaundryNotes</strong>. Seluruh hak cipta dilindungi. Dikembangkan oleh Kelompok 7 Basis Data Lanjut.
         </p>
     </footer>
     

@@ -10,18 +10,20 @@
 </div>
 
 <div class="mt-4">
-    <form action="">
+    <form action="{{route('layanan.store')}}" method="POST">
+        @method('POST')
+        @csrf
         <x-input-with-icon
             type="text"
-            name="nama_paket"
+            name="nama"
             label="Nama Paket"
             placeholder="Nama Paket"
             icon="material-symbols:local-laundry-service-outline"
         />
         <x-input-with-icon
                 type="number"
-                name="harga"
-                label="Harga"
+                name="harga_per_kg"
+                label="Harga Per Kg"
                 placeholder="Harga"
                 icon="tdesign:money"
             />
@@ -34,8 +36,8 @@
             />
         
         <div class="flex gap-4 mt-4">
-            <x-button text="Tambah Paket" icon="ic:baseline-plus"/>
-            <x-button text="Kembali" type="button" href="#" asLink="true" icon="mingcute:back-fill"/>
+            <x-button text="Tambah Paket" type="submit" icon="ic:baseline-plus"/>
+            <x-button text="Kembali" type="button" href="{{route('layanan.index')}}" asLink="true" icon="mingcute:back-fill" baseStyle="0"/>
         </div>
     </form>
 </div>

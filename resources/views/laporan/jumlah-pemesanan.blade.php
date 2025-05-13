@@ -66,21 +66,13 @@
             </tr>
         </thead>
         <tbody class="[&>tr:nth-child(even)]:bg-skyBlue">
+            @foreach($pemesanan as $index => $item)
             <tr>
-                <td>1</td>
-                <td>Januari</td>
-                <td>20</td>
+                <td>{{$index + 1}}</td>
+                <td>{{ \Carbon\Carbon::create()->month($item->bulan)->locale('id')->monthName }}</td>
+                <td>{{$item->jumlah_pesanan}}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Februari</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Maret</td>
-                <td>20</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

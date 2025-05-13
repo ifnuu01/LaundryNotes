@@ -9,6 +9,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
+            $.fn.dataTable.ext.errMode = 'none';
             $('#pesananTable').DataTable({
                 language: {
                     searchPlaceholder: "Cari data...",
@@ -50,10 +51,7 @@
         <h2 class="text-lg font-semibold text-fg">Daftar Paket Layanan</h2>
         <p class="text-fg text-sm">Menampilkan semua paket layanan pada sistem LaundryNotes</p>
     </div>
-    <button class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">
-        <iconify-icon icon="ic:baseline-plus" width="20" height="20"></iconify-icon>
-        <span>Tambah</span>
-    </button>
+    <x-button text="Tambah Layanan" type="button" href="{{route('layanan.create')}}" asLink="true" icon="ic:baseline-plus"/>
 </div>
 
 <div class="mt-4">
@@ -68,51 +66,36 @@
             </tr>
         </thead>
         <tbody class="[&>tr:nth-child(even)]:bg-skyBlue">
-            <tr>
-                <td>1</td>
-                <td>Konco Konco</td>
-                <td>5 kg</td>
-                <td>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-success text-successDark">
-                        Aktif
-                    </span>
-                </td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-blueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:edit" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-danger text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:trash" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Mary Jane</td>
-                <td>10 kg</td>
-                <td>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-warning text-warningDark">
-                        Non-Aktif
-                    </span>
-                </td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-blueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:edit" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-danger text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:trash" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Peter Parker</td>
-                <td>7 kg</td>
-                <td>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-success text-successDark">
-                        Aktif
-                    </span>
-                </td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-blueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:edit" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-danger text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:trash" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
+            @forelse ($pakets as $index => $paket)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $paket->nama}}</td>
+                    <td>Rp {{ number_format($paket->harga_per_kg, 2, ',', '.') }}</td>
+                    <td>
+                        <span class="inline-block px-3 py-1 text-sm rounded-full capitalize {{ $paket->status == 'Aktif' ? 'bg-success text-successDark' : 'bg-danger text-dangerDark' }}">
+                            {{ $paket->status }}
+                        </span>
+                    </td>
+                    <td class="flex gap-2">
+                        <x-button type="button" href="{{ route('layanan.show', $paket->id) }}" asLink="true" icon="iconoir:eye-solid"/>
+                        <x-button color="bg-blueDark" type="button" href="{{ route('layanan.edit', $paket->id) }}" asLink="true" icon="tabler:edit"/>
+                        <form id="delete-form-{{ $paket->id }}" action="{{ route('layanan.destroy', $paket->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <x-button 
+                                color="bg-danger btn-delete" 
+                                type="button" 
+                                icon="tabler:trash"
+                                dataId="{{ $paket->id }}"
+                            />
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center text-fg">Tidak ada data paket layanan</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

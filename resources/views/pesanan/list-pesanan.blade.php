@@ -9,6 +9,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
+            $.fn.dataTable.ext.errMode = 'none';
             $('#pesananTable').DataTable({
                 language: {
                     searchPlaceholder: "Cari data...",
@@ -28,7 +29,7 @@
                 dom:
                     "<'flex justify-between items-center mb-4'f<'text-sm' l>>" +
                     "<'overflow-x-auto't>" +
-                    "<'flex justify-between items-center mt-4'i<'text-sm' p>>"   
+                    "<'flex justify-between items-center mt-4'i<'text-sm' p>>", 
             });
 
             const searchInput = document.querySelector('#pesananTable_filter input');
@@ -50,10 +51,7 @@
         <h2 class="text-lg font-semibold text-fg">Daftar Pesanan Laundry</h2>
         <p class="text-fg text-sm">Menampilkan semua pesanan pada sistem LaundryNotes</p>
     </div>
-    <button class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">
-        <iconify-icon icon="ic:baseline-plus" width="20" height="20"></iconify-icon>
-        <span>Tambah</span>
-    </button>
+    <x-button text="Tambah Pesanan" type="button" href="{{route('pesanan.create')}}" asLink="true" icon="ic:baseline-plus"/>
 </div>
 
 <div class="mt-4">
@@ -62,73 +60,55 @@
             <tr class="text-fg font-semibold">
                 <th>No</th>
                 <th>Nama Pelanggan</th>
-                <th>Nama Kasir</th>
-                <th>Jenis Paket</th>
-                <th>Berat</th>
                 <th>Status</th>
                 <th>Tanggal Pesanan</th>
-                <th>Tanggal Selesai</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody class="[&>tr:nth-child(even)]:bg-skyBlue">
-            <tr>
-                <td>1</td>
-                <td>Konco Konco</td>
-                <td>Awewe</td>
-                <td>Paket Reguler</td>
-                <td>5 kg</td>
-                <td>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-success text-successDark">
-                        Selesai
-                    </span>
-                </td>
-                <td>2023-10-01</td>
-                <td>2023-10-02</td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-blueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:edit" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-danger text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:trash" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Mary Jane</td>
-                <td>Ucup</td>
-                <td>Paket Express</td>
-                <td>10 kg</td>
-                <td>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-warning text-warningDark">
-                        Proses
-                    </span>
-                </td>
-                <td>2023-10-03</td>
-                <td>2023-10-04</td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-blueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:edit" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-danger text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:trash" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Peter Parker</td>
-                <td>Joni</td>
-                <td>Paket Reguler</td>
-                <td>7 kg</td>
-                <td>
-                    <span class="inline-block px-3 py-1 text-sm rounded-full bg-success text-successDark">
-                        Selesai
-                    </span>
-                </td>
-                <td>2023-10-05</td>
-                <td>2023-10-06</td>
-                <td class="flex gap-2">
-                    <button class="bg-skyBlueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="iconoir:eye-solid" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-blueDark text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:edit" width="20" height="20"></iconify-icon></button>
-                    <button class="bg-danger text-white px-2 py-1  rounded-md"><iconify-icon icon="tabler:trash" width="20" height="20"></iconify-icon></button>
-                </td>
-            </tr>
+            {{-- {{dd($pesanans)}} --}}
+            @forelse ($pesanans as $index => $pesanan)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $pesanan->nama_pelanggan }}</td>
+                    <td>
+                        @if ($pesanan->status == 'Proses')
+                            <span class="inline-block px-3 py-1 text-sm rounded-full bg-warning text-warningDark">
+                                Proses
+                            </span>
+                        @elseif ($pesanan->status == 'Selesai')
+                            <span class="inline-block px-3 py-1 text-sm rounded-full bg-success text-successDark">
+                                Selesai
+                            </span>
+                        @else
+                            <span class="inline-block px-3 py-1 text-sm rounded-full bg-danger text-dangerDark">
+                                Dibatalkan
+                            </span>
+                        @endif
+                    </td>
+                    <td>{{ $pesanan->created_at->format('Y-m-d') }}</td>
+                    <td class="flex gap-2">
+                        <x-button type="button" href="{{ route('pesanan.show', $pesanan->id) }}" asLink="true" icon="iconoir:eye-solid"/>
+                            <x-button color="bg-blueDark" type="button" href="{{ route('pesanan.edit', $pesanan->id) }}" asLink="true" icon="tabler:edit"/>
+                            <form id="delete-form-{{ $pesanan->id }}" action="{{ route('pesanan.destroy', $pesanan->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <x-button 
+                                    color="bg-danger btn-delete" 
+                                    type="button" 
+                                    icon="tabler:trash"
+                                    dataId="{{ $pesanan->id }}"
+                                />
+                            </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center text-fg ">
+                        Tidak ada pesanan
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

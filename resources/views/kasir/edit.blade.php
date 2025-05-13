@@ -1,3 +1,4 @@
+{{-- filepath: c:\laragon\www\laundry_notes\resources\views\kasir\edit.blade.php --}}
 @extends('layouts.dashboard')
 @section('title', 'Ubah Kasir')
 
@@ -10,31 +11,35 @@
 </div>
 
 <div class="mt-4">
-    <form action="">
+    <form action="{{ route('kasir.update', $user->id) }}" method="POST">
+        @method('PUT')
+        @csrf
         <x-input-with-icon
             type="text"
-            name="nama_kasir"
+            name="nama"
             label="Nama Kasir"
             placeholder="Nama Kasir"
             icon="material-symbols:person-outline"
+            value="{{ old('nama', $user->nama) }}"
         />
         <x-input-with-icon
-                type="email"
-                name="email"
-                label="Email"
-                placeholder="email@gmail.com"
-                icon="ic:outline-email"
-            />
+            type="email"
+            name="email"
+            label="Email"
+            placeholder="email@gmail.com"
+            icon="ic:outline-email"
+            value="{{ old('email', $user->email) }}"
+        />
         <x-input-with-icon
             type="password"
             name="password"
-            label="Password"
+            label="Ubah Password"
             placeholder="******"
             icon="mdi:password-outline"
         />
         <div class="flex gap-4 mt-4">
             <x-button text="Ubah Kasir" icon="tabler:edit"/>
-            <x-button text="Kembali" type="button" href="#" asLink="true" icon="mingcute:back-fill"/>
+            <x-button text="Kembali" type="button" href="{{ route('kasir.index') }}" asLink="true" icon="mingcute:back-fill" baseStyle="0"/>
         </div>
     </form>
 </div>

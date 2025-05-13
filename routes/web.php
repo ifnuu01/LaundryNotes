@@ -2,6 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\PaketController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\UsersController;
+
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\TransaksiController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,74 +24,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
 
-Route::get('/dashboard/pesanan', function () {
-    return view('pesanan.list-pesanan');
-})->name('pesanan.index');
+Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
+    Route::get('/dashboard', [BerandaController::class, 'index'])->name('dashboard');
+    Route::resource('dashboard/pesanan', PesananController::class);
+    Route::resource('dashboard/riwayat', RiwayatController::class);
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+});
 
-Route::get('/dashboard/pesanan/create', function () {
-    return view('pesanan.create');
-})->name('pesanan.create');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('dashboard/kasir', UsersController::class);
+    Route::resource('dashboard/layanan', PaketController::class);
+    Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'cetakStruk']);
 
-Route::get('/dashboard/pesanan/edit', function () {
-    return view('pesanan.edit');
-})->name('pesanan.edit');
 
-Route::get('/dashboard/pesanan/detail', function () {
-    return view('pesanan.detail');
-})->name('pesanan.detail');
+    Route::get('/dashboard/jumlah-pemesanan', [LaporanController::class, 'pemesanan'])->name('laporan.pemesanan');
+    // Route::get('/dashboard/jumlah-pemesanan', function () {
+    //     return view('laporan.jumlah-pemesanan');
+    // })->name('laporan.pemesanan');
 
-Route::get('/dashboard/riwayat', function () {
-    return view('riwayat.list-riwayat');
-})->name('riwayat.index');
+    Route::get('/dashboard/kinerja-kasir', [LaporanController::class, 'kinerjaKasir'])->name('laporan.kasir');
 
-Route::get('/dashboard/layanan', function () {
-    return view('layanan.list-layanan');
-})->name('layanan.index');
+    Route::get('/dashboard/paket-terlaris', [LaporanController::class, 'paketTerlaris'])->name('laporan.terlaris');
+    // Route::get('/dashboard/paket-terlaris', function () {
+    //     return view('laporan.paket-terlaris');
+    // })->name('laporan.terlaris');
 
-Route::get('/dashboard/layanan/create', function () {
-    return view('layanan.create');
-})->name('layanan.create');
+    // route::get('/dashboard/total-pendapatan', function () {
+    //     return view('laporan.total-pendapatan');
+    // })->name('laporan.pendapatan');
 
-Route::get('/dashboard/layanan/edit', function () {
-    return view('layanan.edit');
-})->name('layanan.edit');
+    Route::get('/dashboard/total-pendapatan', [LaporanController::class, 'pendapatan'])->name('laporan.pendapatan');
+});
 
-Route::get('/dashboard/layanan/detail', function () {
-    return view('layanan.detail');
-})->name('layanan.detail');
-
-Route::get('/dashboard/kasir', function () {
-    return view('kasir.list-kasir');
-})->name('kasir.index');
-
-Route::get('/dashboard/kasir/create', function () {
-    return view('kasir.create');
-})->name('kasir.create');
-
-Route::get('/dashboard/kasir/edit', function () {
-    return view('kasir.edit');
-})->name('kasir.edit');
-
-Route::get('/dashboard/jumlah-pemesanan', function () {
-    return view('laporan.jumlah-pemesanan');
-})->name('laporan.pemesanan');
-
-Route::get('/dashboard/kinerja-kasir', function () {
-    return view('laporan.kinerja-kasir');
-})->name('laporan.kasir');
-
-Route::get('/dashboard/paket-terlaris', function () {
-    return view('laporan.paket-terlaris');
-})->name('laporan.terlaris');
-
-Route::get('/dashboard/total-pendapatan', function () {
-    return view('laporan.total-pendapatan');
-})->name('laporan.pendapatan');
+Route::middleware(['guest'])->group(function () {
+    Route::resource('/', WelcomeController::class);
+    Route::get('/login', [AuthController::class, 'index'])->name("login");
+    Route::post('/login-proses', [AuthController::class, 'loginProses'])->name("login-proses");
+});

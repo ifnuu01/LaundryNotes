@@ -9,6 +9,7 @@
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     @stack('styles')
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-skyBlue font-jakarta">
     <div class="flex min-h-screen">
@@ -20,7 +21,7 @@
             <nav class="space-y-4 text-fg mt-4">
                 <p class="text-fg text-sm mb-2 font-semibold">Dashboard</p>
                 <div class="ml-2 flex flex-col gap-y-1">
-                    <a href="#" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
                         <iconify-icon icon="material-symbols:dashboard-outline" width="24" height="24"></iconify-icon>
                         <span class="block text-sm font-semibold py-2">Beranda</span>
                     </a>
@@ -33,7 +34,7 @@
                         <span class="block text-sm font-semibold py-2">Riwayat Pesanan</span>
                     </a>
                 </div>
-            
+            @if(Auth::user()->role === 'admin')
                 <p class="text-fg text-sm mb-2 font-semibold">Master Data</p>
                 <div class="ml-2 flex flex-col gap-y-1">
                     <a href="{{ route('layanan.index') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/layanan*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
@@ -64,26 +65,76 @@
                         <iconify-icon icon="gg:profile" width="24" height="24"></iconify-icon>
                         <span class="block text-sm font-semibold py-2">Kinerja Kasir</span>
                     </a>
+
                 </div>
+            @endif
             </nav>
             
           </aside>
 
           <main class="flex-1 p-6 ml-64 overflow-hidden">
-            <div class="mb-6 flex justify-between items-center">
+            <div class="mb-6 flex justify-between items-center fixed top-0 left-[262px] right-2 p-4 z-10">
                 <div>
-                    <h1 class="text-lg text-fg font-semibold">Selamat Datang, Syifai Matcha</h1>
-                    <p class="text-sm text-fg">Selasa, 18 Maret 2025</p>
+                    <h1 class="text-lg text-fg font-semibold capitalize">Selamat Datang, {{Auth::user()->nama}}</h1>
+                    <p class="text-sm text-fg">{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
                 </div>
                 <div>
-                    <x-button width="w-full" text="Keluar" icon="material-symbols:logout"/>
+                    <form action="{{route('logout')}}" method="POST">
+                        @csrf
+                        <x-button text="Keluar" type="submit" icon="ic:baseline-logout"/>
+                    </form>
                 </div>
             </div>
-            <div class="bg-white p-6 rounded-md shadow-sm mt-12 animate-fade-right">
+            <div class="bg-white p-6 rounded-md shadow-sm mt-16 animate-fade-up">
               @yield('content')
             </div>
           </main>
     </div>
     @stack('scripts')
+@php
+    $alerts = [
+        'success' => ['icon' => 'success', 'title' => 'Berhasil'],
+        'failed' => ['icon' => 'error', 'title' => 'Oops...']
+    ];
+@endphp
+
+@foreach ($alerts as $type => $config)
+    @if ($message = Session::get($type))
+        <script>
+            Swal.fire({
+                icon: "{{ $config['icon'] }}",
+                title: "{{ $config['title'] }}",
+                text: @json($message),
+                confirmButtonColor: '#3085d6'
+            });
+        </script>
+    @endif
+@endforeach
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.btn-delete');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                const id = this.dataset.id;
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: "Data yang dihapus tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-form-' + id).submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
 </body>
 </html>

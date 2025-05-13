@@ -89,7 +89,7 @@ class UsersController extends Controller
         $user->update([
             'nama' => $request->nama,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->filled('password') ? Hash::make($request->password) : $user->password,
         ]);
 
         return redirect()->route('kasir.index')->with('success', 'User berhasil diperbarui');

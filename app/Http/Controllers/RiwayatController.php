@@ -13,10 +13,10 @@ class RiwayatController extends Controller
     public function index()
     {
         // pesanan dengan status selesai Proses berarti ada Selesai dan Dibatalkan
-        $riwayats = Pesanan::where('user_id', auth()->user()->id)
-            ->whereIn('status', ['Selesai', 'Dibatalkan'])
+        $riwayats = Pesanan::whereIn('status', ['Selesai', 'Dibatalkan'])
             ->orderBy('created_at', 'desc')
             ->get();
+        // dd($riwayats);
         return view('riwayat.list-riwayat', compact('riwayats'));
     }
 

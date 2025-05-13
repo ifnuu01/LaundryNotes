@@ -13,23 +13,25 @@ class LaporanController extends Controller
                 DB::raw('MONTH(tanggal_selesai) as bulan'),
                 DB::raw('COUNT(*) as jumlah_pesanan')
             )
+            ->where('status', 'selesai')
+            ->where('tanggal_selesai', '>=', now()->subYear())
             ->groupBy(DB::raw('MONTH(tanggal_selesai)'))
             ->get();
 
         return view('laporan.jumlah-pemesanan', compact('pemesanan'));
     }
 
-    // public function pendapatan()
-    // {
-    //     $pendapatan = Pesanan::select(
-    //             DB::raw('MONTH(tanggal_selesai) as bulan'),
-    //             DB::raw('SUM(total_harga) as jumlah_pendapatan')
-    //         )
-    //         ->groupBy(DB::raw('MONTH(tanggal_selesai)'))
-    //         ->get();
+    public function pendapatan()
+    {
+        $pendapatan = Pesanan::select(
+                DB::raw('MONTH(tanggal_selesai) as bulan'),
+                DB::raw('SUM(total_harga) as jumlah_pendapatan')
+            )
+            ->groupBy(DB::raw('MONTH(tanggal_selesai)'))
+            ->get();
 
-    //     return view('laporan.pendapatan', compact('pendapatan'));
-    // }
+        return view('laporan.pendapatan', compact('pendapatan'));
+    }
 
     public function paketTerlaris()
     {

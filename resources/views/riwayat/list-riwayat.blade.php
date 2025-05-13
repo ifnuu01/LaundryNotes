@@ -94,7 +94,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="text-center text-fg font-semibold">
+                    <td colspan="6" class="text-center text-fg">
                         Tidak ada riwayat pesanan
                     </td>
                 </tr>

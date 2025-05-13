@@ -164,7 +164,11 @@
     <section data-aos="zoom-in" data-aos-duration="2000" class="py-10 px-6 md:px-44 flex justify-center items-center gap-4">
         <div class="bg-skyBlueDark w-full rounded-lg shadow-md flex flex-col gap-4 p-6 md:p-10 justify-center items-center">
             <h1 class="text-2xl md:text-5xl font-bold text-white text-center">Cucian numpuk? <br> Kami yang beresin!</h1>
-            <button  class="bg-white w-fit text-skyBlueDark font-semibold px-6 py-4 mt-4 rounded-full">Laundry Sekarang</button>
+            <a 
+             href="https://wa.me/6289501603099?text=Halo%20LaundryNotes,%20saya%20ingin%20laundry%20sekarang!"
+             target="_blank"
+             data-aos="fade-up" data-aos-duration="2000"
+             class="bg-white w-fit text-skyBlueDark font-semibold px-6 py-4 mt-4 rounded-full">Laundry Sekarang</a>
         </div>
     </section>
 

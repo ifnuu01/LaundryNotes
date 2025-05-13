@@ -72,10 +72,15 @@
                     <td>{{ $user->email }}</td>
                     <td class="flex gap-2">
                         <x-button color="bg-blueDark" type="button" href="{{ route('kasir.edit', $user->id) }}" asLink="true" icon="tabler:edit"/>
-                        <form action="{{ route('kasir.destroy', $user->id) }}" method="POST">
+                        <form id="delete-form-{{ $user->id }}" action="{{ route('kasir.destroy', $user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <x-button color="bg-danger" type="submit" icon="tabler:trash"/>
+                            <x-button 
+                                color="bg-danger btn-delete" 
+                                type="button" 
+                                icon="tabler:trash"
+                                dataId="{{ $user->id }}"
+                            />
                         </form>
                     </td>
                 </tr>

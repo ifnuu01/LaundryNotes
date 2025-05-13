@@ -11,7 +11,7 @@
         <span>{{ $text }}</span>
     </a>
 @elseif($type)
-    <button type="{{ $type }}" class="{{ $baseClass }}">
+    <button type="{{ $type }}" class="{{ $baseClass }}" data-id="{{ $dataId}}">
         @if($icon)
             <iconify-icon icon="{{ $icon }}" width="20" height="20"></iconify-icon>
         @endif

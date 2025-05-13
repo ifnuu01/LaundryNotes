@@ -39,7 +39,7 @@
         />
         <div class="flex gap-4 mt-4">
             <x-button text="Ubah Kasir" icon="tabler:edit"/>
-            <x-button text="Kembali" type="button" href="{{ route('kasir.index') }}" asLink="true" icon="mingcute:back-fill"/>
+            <x-button text="Kembali" type="button" href="{{ route('kasir.index') }}" asLink="true" icon="mingcute:back-fill" baseStyle="0"/>
         </div>
     </form>
 </div>

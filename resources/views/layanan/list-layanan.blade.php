@@ -79,10 +79,15 @@
                     <td class="flex gap-2">
                         <x-button type="button" href="{{ route('layanan.show', $paket->id) }}" asLink="true" icon="iconoir:eye-solid"/>
                         <x-button color="bg-blueDark" type="button" href="{{ route('layanan.edit', $paket->id) }}" asLink="true" icon="tabler:edit"/>
-                        <form action="{{ route('layanan.destroy', $paket->id) }}" method="POST">
+                        <form id="delete-form-{{ $paket->id }}" action="{{ route('layanan.destroy', $paket->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <x-button color="bg-danger" type="submit" icon="tabler:trash"/>
+                            <x-button 
+                                color="bg-danger btn-delete" 
+                                type="button" 
+                                icon="tabler:trash"
+                                dataId="{{ $paket->id }}"
+                            />
                         </form>
                     </td>
                 </tr>

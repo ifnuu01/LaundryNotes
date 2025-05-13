@@ -17,9 +17,6 @@
                     label="Username"
                     icon="material-symbols:person-outline"
                 />
-                @error('email')
-                    <div class="text-red-500 text-sm mt-1 w-full">{{ $message }}</div>
-                @enderror
                 <x-input-with-icon
                     type="password"
                     name="password"
@@ -27,9 +24,6 @@
                     placeholder="******"
                     icon="mdi:password-outline"
                 />
-                @error('password')
-                    <div class="text-red-500 text-sm mt-1 w-full">{{ $message }}</div>
-                @enderror
                 <div class="mt-4 w-full">
                     <x-button text="Masuk" icon="material-symbols:login" width="w-full"/>
                 </div>
@@ -37,15 +31,27 @@
             </form>
         </div>
     </div>
-    {{-- sweet alert --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if($message = Session::get('failed'))
+@endsection
+
+@push('scripts')
+
+@php
+    $alerts = [
+        'success' => ['icon' => 'success', 'title' => 'Berhasil'],
+        'failed' => ['icon' => 'error', 'title' => 'Oops...']
+    ];
+@endphp
+
+@foreach ($alerts as $type => $config)
+    @if ($message = Session::get($type))
         <script>
-        Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "{{$message}}",
-        });
+            Swal.fire({
+                icon: "{{ $config['icon'] }}",
+                title: "{{ $config['title'] }}",
+                text: @json($message),
+                confirmButtonColor: '#3085d6'
+            });
         </script>
     @endif
-    @endsection
+@endforeach
+@endpush

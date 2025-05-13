@@ -9,6 +9,7 @@
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     @stack('styles')
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-skyBlue font-jakarta">
     <div class="flex min-h-screen">
@@ -90,5 +91,50 @@
           </main>
     </div>
     @stack('scripts')
+@php
+    $alerts = [
+        'success' => ['icon' => 'success', 'title' => 'Berhasil'],
+        'failed' => ['icon' => 'error', 'title' => 'Oops...']
+    ];
+@endphp
+
+@foreach ($alerts as $type => $config)
+    @if ($message = Session::get($type))
+        <script>
+            Swal.fire({
+                icon: "{{ $config['icon'] }}",
+                title: "{{ $config['title'] }}",
+                text: @json($message),
+                confirmButtonColor: '#3085d6'
+            });
+        </script>
+    @endif
+@endforeach
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.btn-delete');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                const id = this.dataset.id;
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: "Data yang dihapus tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-form-' + id).submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
 </body>
 </html>

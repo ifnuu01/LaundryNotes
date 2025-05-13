@@ -11,7 +11,7 @@ class Button extends Component
     /**
      * Create a new component instance.
      */
-    public $type, $icon, $text, $color, $width, $asLink, $href, $baseStyle;
+    public $type, $icon, $text, $color, $width, $asLink, $href, $baseStyle, $dataId;
 
     public function __construct(
         $text = '',
@@ -21,7 +21,8 @@ class Button extends Component
         $type = 'submit',
         $asLink = false,
         $href = '#',
-        $baseStyle = true
+        $baseStyle = true,
+        $dataId = ""
     ) {
         $this->type = $type;
         $this->icon = $icon;
@@ -31,6 +32,7 @@ class Button extends Component
         $this->asLink = $asLink;
         $this->href = $href;
         $this->baseStyle = $baseStyle;
+        $this->dataId = $dataId;
     }
 
     public function render()

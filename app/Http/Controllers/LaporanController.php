@@ -25,12 +25,14 @@ class LaporanController extends Controller
     {
         $pendapatan = Pesanan::select(
                 DB::raw('MONTH(tanggal_selesai) as bulan'),
-                DB::raw('SUM(total_harga) as jumlah_pendapatan')
+                DB::raw('SUM(pesanans.berat_kg * pakets.harga_per_kg) as total_pendapatan')
             )
+            ->join('pakets', 'pesanans.paket_id', '=', 'pakets.id')
+            ->where('pesanans.status', 'selesai')
             ->groupBy(DB::raw('MONTH(tanggal_selesai)'))
             ->get();
 
-        return view('laporan.pendapatan', compact('pendapatan'));
+        return view('laporan.total-pendapatan', compact('pendapatan'));
     }
 
     public function paketTerlaris()

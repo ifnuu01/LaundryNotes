@@ -36,7 +36,6 @@ Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('dashboard/kasir', UsersController::class);
     Route::resource('dashboard/layanan', PaketController::class);
-    Route::get('/laporan/pendapatan', [LaporanController::class, 'pendapatan']);
     Route::get('/laporan/paket-terlaris', [LaporanController::class, 'paketTerlaris']);
     Route::get('/laporan/kinerja-kasir', [LaporanController::class, 'kinerjaKasir']);
     Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'cetakStruk']);
@@ -46,9 +45,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Route::get('/dashboard/jumlah-pemesanan', function () {
     //     return view('laporan.jumlah-pemesanan');
     // })->name('laporan.pemesanan');
-    Route::get('/dashboard/total-pendapatan', function () {
-        return view('laporan.total-pendapatan');
-    })->name('laporan.pendapatan');
 
     Route::get('/dashboard/kinerja-kasir', function () {
         return view('laporan.kinerja-kasir');
@@ -58,6 +54,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         return view('laporan.paket-terlaris');
     })->name('laporan.terlaris');
 
+    // route::get('/dashboard/total-pendapatan', function () {
+    //     return view('laporan.total-pendapatan');
+    // })->name('laporan.pendapatan');
+
+    Route::get('/dashboard/total-pendapatan', [LaporanController::class, 'pendapatan'])->name('laporan.pendapatan');
 });
 
 Route::middleware(['guest'])->group(function () {

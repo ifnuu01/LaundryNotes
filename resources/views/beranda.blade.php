@@ -17,7 +17,8 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {{-- Card: Pesanan Proses --}}
-    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4 hover:scale-110 hover:shadow-lg transition-transform duration-300">
+        {{-- Icon --}}
         <iconify-icon icon="mdi:progress-clock" width="40" height="40" class="text-skyBlueDark"></iconify-icon>
         <div>
             <h3 class="text-lg font-semibold text-gray-700">Pesanan Proses</h3>
@@ -26,7 +27,8 @@
     </div>
 
     {{-- Card: Pesanan Selesai --}}
-    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4 hover:scale-110 hover:shadow-lg transition-transform duration-300">
+        {{-- Icon --}}
         <iconify-icon icon="mdi:check-circle-outline" width="40" height="40" class="text-green-500"></iconify-icon>
         <div>
             <h3 class="text-lg font-semibold text-gray-700">Pesanan Selesai</h3>
@@ -35,7 +37,8 @@
     </div>
 
     {{-- Card: Pesanan Dibatalkan --}}
-    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4 hover:scale-110 hover:shadow-lg transition-transform duration-300">
+        {{-- Icon --}}
         <iconify-icon icon="mdi:cancel" width="40" height="40" class="text-red-500"></iconify-icon>
         <div>
             <h3 class="text-lg font-semibold text-gray-700">Pesanan Dibatalkan</h3>
@@ -44,7 +47,8 @@
     </div>
 
     {{-- Card: Total Pesanan --}}
-    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4 hover:scale-110 hover:shadow-lg transition-transform duration-300">
+        {{-- Icon --}}
         <iconify-icon icon="mdi:clipboard-list-outline" width="40" height="40" class="text-gray-700"></iconify-icon>
         <div>
             <h3 class="text-lg font-semibold text-gray-700">Total Pesanan</h3>
@@ -53,7 +57,8 @@
     </div>
 
     {{-- Card: Jumlah Kasir --}}
-    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4 hover:scale-110 hover:shadow-lg transition-transform duration-300">
+        {{-- Icon --}}
         <iconify-icon icon="mdi:account-group-outline" width="40" height="40" class="text-purple-500"></iconify-icon>
         <div>
             <h3 class="text-lg font-semibold text-gray-700">Jumlah Kasir</h3>
@@ -62,7 +67,8 @@
     </div>
 
     {{-- Card: Total Pendapatan --}}
-    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4 hover:scale-110 hover:shadow-lg transition-transform duration-300">
+        {{-- Icon --}}
         <iconify-icon icon="mdi:cash-multiple" width="40" height="40" class="text-yellow-500"></iconify-icon>
         <div>
             <h3 class="text-lg font-semibold text-gray-700">Total Pendapatan</h3>
@@ -71,7 +77,8 @@
     </div>
 
     {{-- Card: Jumlah Layanan --}}
-    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4">
+    <div class="bg-white p-6 rounded-lg shadow-md flex items-center gap-4 hover:scale-110 hover:shadow-lg transition-transform duration-300">
+        {{-- Icon --}}
         <iconify-icon icon="mdi:package-variant" width="40" height="40" class="text-indigo-500"></iconify-icon>
         <div>
             <h3 class="text-lg font-semibold text-gray-700">Jumlah Layanan</h3>

@@ -21,6 +21,20 @@ class LaporanController extends Controller
         return view('laporan.jumlah-pemesanan', compact('pemesanan'));
     }
 
+    public function printPemesanan()
+    {
+        $pemesanan = Pesanan::select(
+                DB::raw('MONTH(tanggal_selesai) as bulan'),
+                DB::raw('COUNT(*) as jumlah_pesanan')
+            )
+            ->where('status', 'selesai')
+            // ->where('tanggal_selesai', '>=', now()->subYear())
+            ->groupBy(DB::raw('MONTH(tanggal_selesai)'))
+            ->get();
+
+        return view('laporan.print-pemesanan', compact('pemesanan'));
+    }
+
     public function pendapatan()
     {
         $pendapatan = Pesanan::select(

@@ -50,10 +50,10 @@
         <h2 class="text-lg font-semibold text-fg">Jumlah Pemesanan</h2>
         <p class="text-fg text-sm">Menampilkan jumlah pemesanan per-bulan pada sistem LaundryNotes</p>
     </div>
-    <button class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">
+    <a href="{{route('laporan.print-pemesanan')}}" target="_blank" class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">
         <iconify-icon icon="material-symbols:print-outline" width="24" height="24"></iconify-icon>
         <span>Cetak Laporan</span>
-    </button>
+    </a>
 </div>
 
 <div class="mt-4">

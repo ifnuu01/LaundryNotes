@@ -37,12 +37,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('dashboard/kasir', UsersController::class);
     Route::resource('dashboard/layanan', PaketController::class);
     Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'cetakStruk']);
+    
 
 
     Route::get('/dashboard/jumlah-pemesanan', [LaporanController::class, 'pemesanan'])->name('laporan.pemesanan');
     // Route::get('/dashboard/jumlah-pemesanan', function () {
     //     return view('laporan.jumlah-pemesanan');
     // })->name('laporan.pemesanan');
+    Route::get('/dashboard/laporan/pemesanan', [LaporanController::class, 'printPemesanan'])->name('laporan.print-pemesanan');
 
     Route::get('/dashboard/kinerja-kasir', [LaporanController::class, 'kinerjaKasir'])->name('laporan.kasir');
 

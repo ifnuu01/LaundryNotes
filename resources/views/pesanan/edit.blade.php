@@ -41,7 +41,27 @@
                 @endforeach
             </x-select-with-icon>
         </div>
-        <x-input-with-icon
+            <div class="flex gap-4">
+                <x-input-with-icon
+                        type="text"
+                        name="harga"
+                        label="Harga Total"
+                        placeholder="Harga Total"
+                        icon="tdesign:money"
+                        value="Rp {{ number_format($harga_total, 0, ',', '.') }}"
+                        disabled
+                    />
+                <x-input-with-icon
+                        type="number"
+                        name="bayar"
+                        label="Bayar"
+                        placeholder="Bayar"
+                        icon="tdesign:money"
+                        value="{{ $pesanan->bayar }}"
+                    />
+
+            </div>
+            <x-input-with-icon
                 type="text"
                 name="catatan"
                 label="Catatan"
@@ -49,19 +69,10 @@
                 icon="material-symbols:note-outline"
                 value="{{ $pesanan->catatan }}"
             />
-        <x-input-with-icon
-                type="text"
-                name="harga"
-                label="Harga"
-                placeholder="Harga"
-                icon="tdesign:money"
-                value="Rp {{ number_format($harga_total, 0, ',', '.') }}"
-                disabled
-            />
         <x-select-with-icon
                 name="status"
                 label="Status"
-                icon="material-symbols:local-laundry-service-outline"
+                icon="hugeicons:status"
                 placeholder="Status"
             >
                 <option value="Proses" {{ $pesanan->status == 'Proses' ? 'selected' : '' }}>Proses</option>

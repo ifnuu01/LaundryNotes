@@ -43,13 +43,33 @@
                 />
                 <x-input-with-icon
                     type="text"
-                    name="status"
-                    label="Status"
-                    placeholder="Status"
+                    name="paket"
+                    label="Paket Layanan"
+                    placeholder="Paket Layanan"
                     icon="material-symbols:local-laundry-service-outline"
-                    value="{{ $pesanan->status }}"
+                    value="{{ $pesanan->paket->nama }}"
                     disabled
                 />
+            </div>
+            <div class="flex gap-4">
+                <x-input-with-icon
+                        type="text"
+                        name="harga"
+                        label="Harga Total"
+                        placeholder="Harga"
+                        icon="tdesign:money"
+                        value="Rp {{ number_format($harga_total, 0, ',', '.') }}"
+                        disabled
+                    />
+                <x-input-with-icon
+                        type="text"
+                        name="bayar"
+                        label="Bayar"
+                        placeholder="Bayar"
+                        icon="tdesign:money"
+                        value="Rp {{ number_format($pesanan->bayar, 0, ',', '.') }}"
+                        disabled
+                    />
             </div>
             <x-input-with-icon
                     type="text"
@@ -62,11 +82,11 @@
                 />
             <x-input-with-icon
                     type="text"
-                    name="harga"
-                    label="Harga Total"
-                    placeholder="Harga"
-                    icon="tdesign:money"
-                    value="Rp {{ number_format($harga_total, 0, ',', '.') }}"
+                    name="status"
+                    label="Status"
+                    placeholder="Status"
+                    icon="hugeicons:status"
+                    value="{{ $pesanan->status }}"
                     disabled
                 />
             </div>

@@ -13,7 +13,8 @@ class PesananController extends Controller
      */
     public function index()
     {
-        $pesanans = Pesanan::all();
+        // diurutkan dari tanggal pesan terbaru
+        $pesanans = Pesanan::orderBy('tanggal_pesan', 'desc')->get();
         return view('pesanan.list-pesanan', compact('pesanans'));
     }
 
@@ -37,6 +38,8 @@ class PesananController extends Controller
             'berat_kg' => 'required|numeric',
             'catatan' => 'nullable|string|max:5000',
             'paket_id' => 'required|exists:pakets,id',
+            // bayar tidak boleh lebih kecil paket harga per kg * berat kg
+            'bayar' => 'required|numeric|min:' . ($request->berat_kg * Pakets::find($request->paket_id)->harga_per_kg),
         ]);
 
         Pesanan::create([
@@ -47,6 +50,7 @@ class PesananController extends Controller
             'tanggal_pesan' => now()->toDateString(),
             'status' => "Proses",
             'catatan' => $request->catatan,
+            'bayar' => $request->bayar,
         ]);
 
         return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil ditambahkan');
@@ -99,6 +103,7 @@ class PesananController extends Controller
             'catatan' => 'nullable|string|max:5000',
             'paket_id' => 'required|exists:pakets,id',
             'status' => 'required|in:Proses,Selesai,Dibatalkan',
+            'bayar' => 'required|numeric|min:' . ($request->berat_kg * Pakets::find($request->paket_id)->harga_per_kg),
         ]);
 
         $pesanan->update([
@@ -109,6 +114,7 @@ class PesananController extends Controller
             'status' => $request->status,
             'catatan' => $request->catatan,
             'tanggal_selesai' => $request->status == 'Selesai' || $request->status == 'Dibatalkan' ? now()->toDateString() : null,
+            'bayar' => $request->bayar,
         ]);
 
         return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil diperbarui');

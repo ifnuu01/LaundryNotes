@@ -60,15 +60,26 @@
                     value="{{ $riwayat->catatan }}"
                     disabled
                 />
-            <x-input-with-icon
-                    type="text"
-                    name="harga"
-                    label="Harga Total"
-                    placeholder="Harga"
-                    icon="tdesign:money"
-                    value="Rp {{ number_format($harga_total, 0, ',', '.') }}"
-                    disabled
-                />
+                <div class="flex gap-4">
+                    <x-input-with-icon
+                            type="text"
+                            name="harga"
+                            label="Harga Total"
+                            placeholder="Harga"
+                            icon="tdesign:money"
+                            value="Rp {{ number_format($harga_total, 0, ',', '.') }}"
+                            disabled
+                        />
+                    <x-input-with-icon
+                            type="text"
+                            name="bayar"
+                            label="Bayar"
+                            placeholder="Bayar"
+                            icon="tdesign:money"
+                            value="Rp {{ number_format($riwayat->bayar, 0, ',', '.') }}"
+                            disabled
+                        />
+                </div>
             </div>
         </div>
         <div class="flex gap-4">

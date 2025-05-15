@@ -30,6 +30,7 @@ Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
     Route::get('/dashboard', [BerandaController::class, 'index'])->name('dashboard');
     Route::resource('dashboard/pesanan', PesananController::class);
     Route::resource('dashboard/riwayat', RiwayatController::class);
+    Route::get('/pesanan/{id}/cetak', [PesananController::class, 'cetak'])->name('pesanan.cetak');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
@@ -37,7 +38,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('dashboard/kasir', UsersController::class);
     Route::resource('dashboard/layanan', PaketController::class);
     Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'cetakStruk']);
-    
+
 
 
     Route::get('/dashboard/jumlah-pemesanan', [LaporanController::class, 'pemesanan'])->name('laporan.pemesanan');

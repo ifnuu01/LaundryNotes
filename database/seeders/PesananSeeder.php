@@ -29,7 +29,8 @@ class PesananSeeder extends Seeder
                 'tanggal_selesai' => rand(0, 1) ? now()->addDays(rand(1, 7)) : null,
                 'status' => $statuses[array_rand($statuses)],
                 'catatan' => $i % 3 == 0 ? "Catatan untuk Pesanan {$i}" : null,
-                'bayar' => rand(5000, 15000) * (rand(1, 10)),
+                // tidak boleh lebih kecil dari harga per kg * berat kg
+                'bayar' => 120000,
             ]);
         }
     }

@@ -37,6 +37,10 @@ Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('dashboard/kasir', UsersController::class);
     Route::resource('dashboard/layanan', PaketController::class);
+    Route::get('/dashboard/laporan/cetak-pemesanan', [LaporanController::class, 'cetakPemesanan'])->name('laporan.cetak-pemesanan');
+    Route::get('/dashboard/laporan/cetak-pendapatan', [LaporanController::class, 'cetakPendapatan'])->name('laporan.cetak-pendapatan');
+    Route::get('/dashboard/laporan/cetak-kinerja-kasir', [LaporanController::class, 'cetakKinerjaKasir'])->name('laporan.cetak-kinerja-kasir');
+    Route::get('/dashboard/laporan/cetak-paket-terlaris', [LaporanController::class, 'cetakTerlaris'])->name('laporan.cetak-paket-terlaris');
     Route::get('/transaksi/struk/{id}', [TransaksiController::class, 'cetakStruk']);
 
 

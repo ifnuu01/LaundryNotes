@@ -132,4 +132,12 @@ class PesananController extends Controller
         $pesanan->delete();
         return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dihapus');
     }
+
+    public function cetak($id)
+    {
+        $pesanan = Pesanan::with(['user', 'paket'])->findOrFail($id);
+        $harga_total = $pesanan->paket->harga_per_kg * $pesanan->berat_kg;
+        $kembali = $pesanan->bayar - $harga_total;
+        return view('pesanan.struk', compact('pesanan', 'harga_total', 'kembali'));
+    }
 }

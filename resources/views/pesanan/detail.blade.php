@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="flex gap-4 mt-4 w-full justify-center items-center">
-            <x-button text="Cetak Detail" icon="material-symbols:print-outline"/>
+            <x-button text="Cetak Struk" icon="material-symbols:print-outline" asLink="true" href="{{ route('pesanan.cetak', $pesanan->id) }}" />
             <x-button text="Kembali" type="button" href="{{route('pesanan.index')}}" asLink="true" icon="mingcute:back-fill" baseStyle="0"/>
         </div>
     </form>

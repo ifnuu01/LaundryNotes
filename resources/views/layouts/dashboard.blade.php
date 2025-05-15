@@ -73,7 +73,7 @@
           </aside>
 
           <main class="flex-1 p-6 ml-64 overflow-hidden">
-            <div class="mb-6 flex justify-between items-center fixed top-0 left-[262px] right-2 p-4 z-10">
+            <div class="mb-6 flex justify-between items-center fixed top-0 left-[262px] right-2 p-4 z-10 bg-skyBlue">
                 <div>
                     <h1 class="text-lg text-fg font-semibold capitalize">Selamat Datang, {{Auth::user()->nama}}</h1>
                     <p class="text-sm text-fg">{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>

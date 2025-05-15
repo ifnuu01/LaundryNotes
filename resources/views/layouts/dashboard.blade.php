@@ -73,15 +73,15 @@
           </aside>
 
           <main class="flex-1 p-6 ml-64 overflow-hidden">
-            <div class="mb-6 flex justify-between items-center fixed top-0 left-[262px] right-2 p-4 z-10">
+            <div class="mb-6 flex justify-between items-center fixed top-0 left-[262px] right-2 p-4 z-10 bg-skyBlue">
                 <div>
                     <h1 class="text-lg text-fg font-semibold capitalize">Selamat Datang, {{Auth::user()->nama}}</h1>
                     <p class="text-sm text-fg">{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
                 </div>
                 <div>
-                    <form action="{{route('logout')}}" method="POST">
+                    <form action="{{route('logout')}}" method="POST" id="logout-form">
                         @csrf
-                        <x-button text="Keluar" type="submit" icon="ic:baseline-logout"/>
+                        <x-button color="bg-danger btn-logout" text="Keluar" type="button" icon="ic:baseline-logout"/>
                     </form>
                 </div>
             </div>
@@ -132,6 +132,26 @@
                         document.getElementById('delete-form-' + id).submit();
                     }
                 });
+            });
+        });
+
+        const logoutButton = document.querySelector('.btn-logout');
+
+        logoutButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Yakin ingin keluar?',
+                text: "Anda akan keluar dari dashboard!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, keluar',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit();
+                }
             });
         });
     });

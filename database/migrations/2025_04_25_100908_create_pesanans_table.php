@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('paket_id')->constrained('pakets');
             $table->string('nama_pelanggan');
             $table->float('berat_kg');
+            $table->float('bayar');
             $table->date('tanggal_pesan');
             $table->date('tanggal_selesai')->nullable();
             $table->enum('status', ['Proses', 'Selesai', 'Dibatalkan'])->default('Proses');

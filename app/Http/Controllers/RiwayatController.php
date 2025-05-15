@@ -14,7 +14,7 @@ class RiwayatController extends Controller
     {
         // pesanan dengan status selesai Proses berarti ada Selesai dan Dibatalkan
         $riwayats = Pesanan::whereIn('status', ['Selesai', 'Dibatalkan'])
-            ->orderBy('created_at', 'desc')
+            ->orderBy('tanggal_pesan', 'desc')
             ->get();
         // dd($riwayats);
         return view('riwayat.list-riwayat', compact('riwayats'));
@@ -47,6 +47,7 @@ class RiwayatController extends Controller
         }
 
         $harga_total = $riwayat->paket->harga_per_kg * $riwayat->berat_kg;
+        // dd($harga_total);
         return view('riwayat.detail', compact('riwayat', 'harga_total'));
     }
 

@@ -40,7 +40,7 @@
         <x-select-with-icon
                 name="status"
                 label="Status Paket"
-                icon="material-symbols:local-laundry-service-outline"
+                icon="hugeicons:status"
             >
                 <option value="Aktif" {{ $paket->status == 'aktif' ? 'selected' : '' }}>Aktif</option>
                 <option value="Nonaktif" {{ $paket->status == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>

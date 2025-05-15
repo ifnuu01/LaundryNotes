@@ -19,6 +19,7 @@ class Pesanan extends Model
         'tanggal_selesai',
         'status',
         'catatan',
+        'bayar',
     ];
 
     public function user()

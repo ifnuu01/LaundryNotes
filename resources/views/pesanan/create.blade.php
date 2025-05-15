@@ -1,6 +1,24 @@
 @extends('layouts.dashboard')
 @section('title', 'Tambah Pesanan')
 
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function hitungTotal() {
+        const berat = parseFloat(document.getElementById('berat_kg').value) || 0;
+        const paket = document.getElementById('paket_id');
+        const hargaPerKg = paket.options[paket.selectedIndex]?.getAttribute('data-harga') || 0;
+        const total = berat * hargaPerKg;
+        document.getElementById('harga_total').value = total ? 'Rp ' + Number(total).toLocaleString('id-ID') : '';
+    }
+
+    document.getElementById('berat_kg').addEventListener('input', hitungTotal);
+    document.getElementById('paket_id').addEventListener('change', hitungTotal);
+});
+</script>
+@endpush
+
 @section('content')
 <div class="flex justify-between items-center mb-4">
     <div class="flex flex-col gap-2">
@@ -29,17 +47,39 @@
                 placeholder="Berat Cucian"
                 icon="mdi:weight-kilogram"
                 value="{{ old('berat_kg') }}"
+                id="berat_kg"
             />
             <x-select-with-icon
                 name="paket_id"
                 label="Paket Layanan"
                 icon="material-symbols:local-laundry-service-outline"
                 placeholder="Nama Layanan"
+                id="paket_id"
             >
                 @foreach($pakets as $paket)
-                    <option value="{{ $paket->id }}">{{ $paket->nama}}</option>
+                    <option value="{{ $paket->id }}" data-harga="{{ $paket->harga_per_kg }}">{{ $paket->nama}}</option>
                 @endforeach
             </x-select-with-icon>
+        </div>
+        <div class="flex gap-4">
+            <x-input-with-icon
+                type="text"
+                name="harga_total"
+                label="Harga Total"
+                placeholder="Harga Total"
+                icon="tdesign:money"
+                value=""
+                disabled
+                id="harga_total"
+            />
+            <x-input-with-icon
+                type="number"
+                name="bayar"
+                label="Bayar"
+                placeholder="Bayar"
+                icon="tdesign:money"
+                value="{{ old('bayar') }}"
+            />
         </div>
         <x-input-with-icon
                 type="text"
@@ -55,5 +95,4 @@
         </div>
     </form>
 </div>
-
 @endsection

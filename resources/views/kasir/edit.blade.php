@@ -29,6 +29,7 @@
             placeholder="email@gmail.com"
             icon="ic:outline-email"
             value="{{ old('email', $user->email) }}"
+            disabled
         />
         <x-input-with-icon
             type="password"

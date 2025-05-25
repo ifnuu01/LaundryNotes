@@ -14,10 +14,10 @@
 <body class="bg-skyBlue font-jakarta">
     <div class="flex min-h-screen">
         <aside class="w-64 p-6 fixed h-full">
-            <div class="flex items-center gap-4">
+            <a href="{{ route('dashboard') }}" class="flex items-center gap-4">
                 <img src="{{asset('images/logo.svg')}}" width="60" height="54" alt="">
                 <p class="text-lg text-fg font-semibold">LaundryNotes</p>
-            </div>
+            </a>
             <nav class="space-y-4 text-fg mt-4">
                 <p class="text-fg text-sm mb-2 font-semibold">Dashboard</p>
                 <div class="ml-2 flex flex-col gap-y-1">

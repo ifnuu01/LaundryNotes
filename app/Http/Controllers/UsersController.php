@@ -13,7 +13,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', '!=', 'admin')->get();
+        $users = User::where('role', '!=', 'admin')->orderBy('created_at', 'desc')->get();
         return view('kasir.list-kasir', compact('users'));
     }
 

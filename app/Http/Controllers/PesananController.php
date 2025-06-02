@@ -23,7 +23,7 @@ class PesananController extends Controller
      */
     public function create()
     {
-        $pakets = Pakets::all();
+        $pakets = Pakets::where('status', 'Aktif')->get();
         return view('pesanan.create', compact('pakets'));
     }
 
@@ -80,7 +80,7 @@ class PesananController extends Controller
         if (!$pesanan) {
             return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
         }
-        $pakets = Pakets::all();
+        $pakets = Pakets::where('status', 'Aktif')->get();
         // harga total
         $harga_total = $pesanan->paket->harga_per_kg * $pesanan->berat_kg;
         return view('pesanan.edit', compact('pesanan', 'pakets', 'harga_total'));

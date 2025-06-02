@@ -12,7 +12,7 @@ class PaketController extends Controller
      */
     public function index()
     {
-        $pakets = Pakets::all();
+        $pakets = Pakets::orderBy('created_at', 'desc')->get();
         // dd($pakets);
         return view('layanan.list-layanan', compact('pakets'));
     }

@@ -19,8 +19,8 @@
                     <tr>
                         <td class="p-2 border border-gray-300">{{$index + 1}}</td>
                         <td class="p-2 border border-gray-300">{{ $item->nama_kasir }}</td>
-                        <td class="p-2 border border-gray-300">{{ $item->jumlah_pesanan }}</td>
-                        <td class="p-2 border border-gray-300">Rp {{ number_format($item->total_pendapatan, 0, ',', '.') }}</td>
+                        <td class="p-2 border text-center border-gray-300">{{ $item->jumlah_pesanan }}</td>
+                        <td class="p-2 border text-center border-gray-300">Rp {{ number_format($item->total_pendapatan, 0, ',', '.') }}</td>
                     </tr>
                 @empty
                     <tr>

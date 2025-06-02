@@ -49,19 +49,19 @@
             
                 <p class="text-fg text-sm mb-2 font-semibold">Laporan</p>
                 <div class="ml-2 flex flex-col gap-y-1">
-                    <a href="{{ route('laporan.pemesanan') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/laporan/pemesanan*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
+                    <a href="{{ route('laporan.pemesanan') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/jumlah-pemesanan*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
                         <iconify-icon icon="lets-icons:order" width="24" height="24"></iconify-icon>
                         <span class="block text-sm font-semibold py-2">Jumlah Pemesanan</span>
                     </a>
-                    <a href="{{ route('laporan.pendapatan') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/laporan/pendapatan*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
+                    <a href="{{ route('laporan.pendapatan') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/total-pendapatan*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
                         <iconify-icon icon="tdesign:money" width="24" height="24"></iconify-icon>
                         <span  class="block text-sm font-semibold py-2">Total Pendapatan</span>
                     </a>
-                    <a href="{{ route('laporan.terlaris') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/laporan/terlaris*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
+                    <a href="{{ route('laporan.terlaris') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/paket-terlaris*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
                         <iconify-icon icon="material-symbols:local-laundry-service-outline" width="24" height="24"></iconify-icon>
                         <span class="block text-sm font-semibold py-2">Paket Terlaris</span>
                     </a>
-                    <a href="{{ route('laporan.kasir') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/laporan/kasir*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
+                    <a href="{{ route('laporan.kasir') }}" class="flex items-center gap-4 cursor-pointer hover:bg-skyBlueDark hover:text-white rounded-md p-2 {{ request()->is('dashboard/kinerja-kasir*') ? 'bg-skyBlueDark text-white' : 'text-fg' }}">
                         <iconify-icon icon="gg:profile" width="24" height="24"></iconify-icon>
                         <span class="block text-sm font-semibold py-2">Kinerja Kasir</span>
                     </a>

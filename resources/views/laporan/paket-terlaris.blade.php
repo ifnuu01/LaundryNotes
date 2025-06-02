@@ -50,7 +50,7 @@
         <h2 class="text-lg font-semibold text-fg">Paket Terlaris</h2>
         <p class="text-fg text-sm">Menampilkan paket terlaris per-bulan pada sistem LaundryNotes</p>
     </div>
-    <a href="{{route('laporan.cetak-paket-terlaris')}}" class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">
+    <a href="#" id="btnCetak" class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">
         <iconify-icon icon="material-symbols:print-outline" width="24" height="24"></iconify-icon>
         <span>Cetak Laporan</span>
     </a>
@@ -76,4 +76,36 @@
         </tbody>
     </table>
 </div>
+
+<!-- Modal Pilih Tahun -->
+<div id="modalTahun" class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-6 w-80">
+        <h3 class="text-lg font-semibold mb-4">Pilih Tahun</h3>
+        <form id="formTahun" action="{{ route('laporan.cetak-paket-terlaris') }}" method="GET">
+            <select name="tahun" class="border rounded-md px-3 py-2 w-full mb-4" required>
+                @php
+                    $tahunSekarang = now()->year;
+                    $tahunAwal = \App\Models\Pesanan::min(DB::raw('YEAR(tanggal_selesai)')) ?? ($tahunSekarang - 5);
+                @endphp
+                @for($tahun = $tahunSekarang; $tahun >= $tahunAwal; $tahun--)
+                    <option value="{{ $tahun }}">{{ $tahun }}</option>
+                @endfor
+            </select>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="toggleModal(false)" class="px-3 py-1 rounded bg-gray-200">Batal</button>
+                <button type="submit" class="px-3 py-1 rounded bg-skyBlueDark text-white">Cetak</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleModal(show = true) {
+        document.getElementById('modalTahun').classList.toggle('hidden', !show);
+    }
+    document.getElementById('btnCetak').addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleModal(true);
+    });
+</script>
 @endsection

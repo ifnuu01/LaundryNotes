@@ -50,7 +50,7 @@
         <h2 class="text-lg font-semibold text-fg">Jumlah Pemesanan</h2>
         <p class="text-fg text-sm">Menampilkan jumlah pemesanan per-bulan pada sistem LaundryNotes</p>
     </div>
-    <a href="{{route('laporan.cetak-pemesanan')}}" class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">
+    <a href="#" id="btnCetak" class="bg-skyBlueDark text-white p-2 rounded-md flex items-center gap-2">
         <iconify-icon icon="material-symbols:print-outline" width="24" height="24"></iconify-icon>
         <span>Cetak Laporan</span>
     </a>
@@ -61,7 +61,7 @@
         <thead>
             <tr class="text-fg font-semibold">
                 <th>No</th>
-                <th>Bulan</th>
+                <th>Tahun</th>
                 <th>Jumlah Pesanan</th>
             </tr>
         </thead>
@@ -69,11 +69,43 @@
             @foreach($pemesanan as $index => $item)
             <tr>
                 <td>{{$index + 1}}</td>
-                <td>{{ \Carbon\Carbon::create()->month($item->bulan)->locale('id')->monthName }}</td>
+                <td>{{ $item->tahun }}</td>
                 <td>{{$item->jumlah_pesanan}}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
+
+<!-- Modal Pilih Tahun -->
+<div id="modalTahun" class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-6 w-80">
+        <h3 class="text-lg font-semibold mb-4">Pilih Tahun</h3>
+        <form id="formTahun" action="{{ route('laporan.cetak-pemesanan') }}" method="GET">
+            <select name="tahun" class="border rounded-md px-3 py-2 w-full mb-4" required>
+                @php
+                    $tahunSekarang = now()->year;
+                    $tahunAwal = $pemesanan->min('tahun') ?? ($tahunSekarang);
+                @endphp
+                @for($tahun = $tahunSekarang; $tahun >= $tahunAwal; $tahun--)
+                    <option value="{{ $tahun }}">{{ $tahun }}</option>
+                @endfor
+            </select>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="toggleModal(false)" class="px-3 py-1 rounded bg-gray-200">Batal</button>
+                <button type="submit" class="px-3 py-1 rounded bg-skyBlueDark text-white">Cetak</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleModal(show = true) {
+        document.getElementById('modalTahun').classList.toggle('hidden', !show);
+    }
+    document.getElementById('btnCetak').addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleModal(true);
+    });
+</script>
 @endsection

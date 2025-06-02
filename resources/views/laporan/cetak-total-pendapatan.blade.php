@@ -18,13 +18,21 @@
                     <tr>
                         <td class="p-2 border border-gray-300">{{$index + 1}}</td>
                         <td class="p-2 border border-gray-300">{{ \Carbon\Carbon::create()->month($item->bulan)->locale('id')->monthName }}</td>
-                        <td class="p-2 border border-gray-300">Rp {{ number_format($item->total_pendapatan, 0, ',', '.') }}</td>
+                        <td class="p-2 border text-center border-gray-300">Rp {{ number_format($item->total_pendapatan, 0, ',', '.') }}</td>
                     </tr>
                 @empty
                     <tr>
                         <td colspan="3" class="p-2 border border-gray-300 text-center">Tidak ada data pemesanan</td>
                     </tr>
                 @endforelse
+                    <tr>
+                        <td colspan="2" class="p-2 border border-gray-300 text-center font-bold">Total</td>
+                        <td class="p-2 border border-gray-300 text-center font-bold">Rp {{ number_format($totalPendapatan, 0, ',', '.') }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="p-2 border border-gray-300 text-center font-bold">Rata-Rata</td>
+                        <td class="p-2 borderborder-gray-300 text-center font-bold">Rp {{ number_format($pendapatan->avg('total_pendapatan'), 0, ',', '.') }}</td>
+                    </tr>
             </tbody>
         </table>
     </div>

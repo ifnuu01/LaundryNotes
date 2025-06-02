@@ -81,14 +81,12 @@ class UsersController extends Controller
         }
         $request->validate([
             'nama' => 'required|string|max:100',
-            'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8',
 
         ]);
 
         $user->update([
             'nama' => $request->nama,
-            'email' => $request->email,
             'password' => $request->filled('password') ? Hash::make($request->password) : $user->password,
         ]);
 

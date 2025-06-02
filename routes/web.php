@@ -24,8 +24,6 @@ use App\Http\Controllers\TransaksiController;
 |
 */
 
-
-
 Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
     // route dashboard
     Route::get('/dashboard', [BerandaController::class, 'index'])->name('dashboard');
@@ -58,8 +56,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['guest'])->group(function () {
     // route landing page
-    Route::resource('/', WelcomeController::class);
 
     Route::get('/login', [AuthController::class, 'index'])->name("login");
     Route::post('/login-proses', [AuthController::class, 'loginProses'])->name("login-proses");
 });
+
+Route::resource('/', WelcomeController::class);

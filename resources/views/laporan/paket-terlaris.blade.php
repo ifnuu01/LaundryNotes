@@ -85,7 +85,9 @@
             <select name="tahun" class="border rounded-md px-3 py-2 w-full mb-4" required>
                 @php
                     $tahunSekarang = now()->year;
-                    $tahunAwal = \App\Models\Pesanan::min(DB::raw('YEAR(tanggal_selesai)')) ?? ($tahunSekarang - 5);
+                    $tahunAwal = $paketTerlaris->min(function($item) {
+                        return \Carbon\Carbon::parse($item->created_at)->year;
+                    }) ?? $tahunSekarang;
                 @endphp
                 @for($tahun = $tahunSekarang; $tahun >= $tahunAwal; $tahun--)
                     <option value="{{ $tahun }}">{{ $tahun }}</option>

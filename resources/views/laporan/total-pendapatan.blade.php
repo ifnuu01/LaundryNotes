@@ -85,7 +85,9 @@
             <select name="tahun" class="border rounded-md px-3 py-2 w-full mb-4" required>
                 @php
                     $tahunSekarang = now()->year;
-                    $tahunAwal = \App\Models\Pesanan::min(DB::raw('YEAR(tanggal_selesai)')) ?? ($tahunSekarang - 5);
+                    $tahunAwal = $pendapatan->min(function($item) {
+                        return $item->tahun;
+                    }) ?? $tahunSekarang;
                 @endphp
                 @for($tahun = $tahunSekarang; $tahun >= $tahunAwal; $tahun--)
                     <option value="{{ $tahun }}">{{ $tahun }}</option>

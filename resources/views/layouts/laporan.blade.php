@@ -3,6 +3,7 @@
 <head>
     <title>Struk Laundry</title>
     @vite(['resources/css/app.css']) 
+    <link rel="icon" href="{{ asset('images/logo.svg') }}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body{

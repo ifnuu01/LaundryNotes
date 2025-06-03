@@ -15,7 +15,6 @@ class LaporanController extends Controller
             DB::raw('COUNT(*) as jumlah_pesanan')
         )
             ->where('status', 'selesai')
-            // ->where('tanggal_selesai', '>=', now()->subYear())
             ->groupBy(DB::raw('YEAR(tanggal_selesai)'))
             ->get();
         return view('laporan.jumlah-pemesanan', compact('pemesanan'));
@@ -134,7 +133,6 @@ class LaporanController extends Controller
             ->groupBy('users.id', 'users.nama')
             ->orderByDesc('total_pendapatan')
             ->get();
-
         return view('laporan.kinerja-kasir', compact('kinerjaKasir'));
     }
 

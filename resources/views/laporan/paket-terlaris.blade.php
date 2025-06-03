@@ -86,7 +86,7 @@
                 @php
                     $tahunSekarang = now()->year;
                     $tahunAwal = $paketTerlaris->min(function($item) {
-                        return \Carbon\Carbon::parse($item->created_at)->year;
+                        return $item->tahun;
                     }) ?? $tahunSekarang;
                 @endphp
                 @for($tahun = $tahunSekarang; $tahun >= $tahunAwal; $tahun--)

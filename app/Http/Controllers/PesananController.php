@@ -47,7 +47,7 @@ class PesananController extends Controller
             'bayar' => 'required|numeric|min:' . $minimum_bayar,
         ]);
 
-        Pesanan::create([
+        $pesanan = Pesanan::create([
             'nama_pelanggan' => $request->nama_pelanggan,
             'berat_kg' => $request->berat_kg,
             'user_id' => auth()->user()->id,
@@ -58,7 +58,7 @@ class PesananController extends Controller
             'bayar' => $request->bayar,
         ]);
 
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil ditambahkan');
+        return redirect()->route('pesanan.show', $pesanan->id)->with('success', 'Pesanan berhasil ditambahkan');
     }
 
     /**
@@ -70,8 +70,8 @@ class PesananController extends Controller
         if (!$pesanan) {
             return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
         }
-        // harga total
-        $paket = Pakets::find($pesanan->paket_id);
+        $paket = Pakets::withTrashed()->find($pesanan->paket_id);
+
         $harga_total = $paket->harga_per_kg * $pesanan->berat_kg;
         return view('pesanan.detail', compact('pesanan', 'harga_total'));
     }
@@ -82,11 +82,11 @@ class PesananController extends Controller
     public function edit($id)
     {
         $pesanan = Pesanan::find($id);
-        if (!$pesanan) {
-            return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan');
+        if (!$pesanan || !$pesanan->paket) {
+            return redirect()->route('pesanan.index')->with('error', 'Pesanan tidak ditemukan atau paket tidak tersedia lagi');
         }
+
         $pakets = Pakets::where('status', 'Aktif')->get();
-        // harga total
         $harga_total = $pesanan->paket->harga_per_kg * $pesanan->berat_kg;
         return view('pesanan.edit', compact('pesanan', 'pakets', 'harga_total'));
     }

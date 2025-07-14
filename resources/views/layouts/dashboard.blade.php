@@ -13,7 +13,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-skyBlue font-jakarta">
-    <div class="flex min-h-screen">
+    <div class="md:hidden lg:hidden flex justify-center items-center h-screen">
+        <p class="text-black font-2xl text-center font-bold">Buka Lewat Laptop atau Dekstop</p>
+    </div>
+    <div class="hidden md:flex min-h-screen">
         <aside class="w-64 p-6 fixed h-full">
             <a href="{{ route('dashboard') }}" class="flex items-center gap-4">
                 <img src="{{asset('images/logo.svg')}}" width="60" height="54" alt="">

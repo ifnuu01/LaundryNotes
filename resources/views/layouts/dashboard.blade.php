@@ -79,11 +79,12 @@
                     <h1 class="text-lg text-fg font-semibold capitalize">Selamat Datang, {{Auth::user()->nama}}</h1>
                     <p class="text-sm text-fg">{{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
                 </div>
-                <div>
+                <div class="flex gap-4">
                     <form action="{{route('logout')}}" method="POST" id="logout-form">
                         @csrf
                         <x-button color="bg-danger btn-logout" text="Keluar" type="button" icon="ic:baseline-logout"/>
                     </form>
+                    <x-button text="Pengaturan" type="button" href="{{route('settings')}}" asLink="true" icon="material-symbols:settings-outline" baseStyle="1"/>
                 </div>
             </div>
             <div class="bg-white p-6 rounded-md shadow-sm mt-16 animate-fade-up">

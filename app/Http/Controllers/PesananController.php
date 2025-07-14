@@ -34,12 +34,17 @@ class PesananController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'nama_pelanggan' => 'required|string|max:100|',
+            'nama_pelanggan' => 'required|string|max:100',
             'berat_kg' => 'required|numeric',
             'catatan' => 'nullable|string|max:5000',
             'paket_id' => 'required|exists:pakets,id',
-            // bayar tidak boleh lebih kecil paket harga per kg * berat kg
-            'bayar' => 'required|numeric|min:' . ($request->berat_kg * Pakets::find($request->paket_id)->harga_per_kg),
+        ]);
+
+        $paket = Pakets::find($request->paket_id);
+        $minimum_bayar = $request->berat_kg * $paket->harga_per_kg;
+
+        $request->validate([
+            'bayar' => 'required|numeric|min:' . $minimum_bayar,
         ]);
 
         Pesanan::create([

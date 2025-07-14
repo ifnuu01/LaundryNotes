@@ -34,6 +34,8 @@ Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
     Route::resource('dashboard/riwayat', RiwayatController::class);
 
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('settings', [AuthController::class, 'settings'])->name('settings');
+    Route::patch('settings/ubah-password', [AuthController::class, 'ubahPassword'])->name('settings.ubah-password');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

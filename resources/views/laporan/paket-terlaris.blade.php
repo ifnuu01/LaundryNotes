@@ -85,13 +85,19 @@
             <select name="tahun" class="border rounded-md px-3 py-2 w-full mb-4" required>
                 @php
                     $tahunSekarang = now()->year;
-                    $tahunAwal = $paketTerlaris->min(function($item) {
-                        return $item->tahun;
-                    }) ?? $tahunSekarang;
+                    if(isset($tahunTersedia) && !empty($tahunTersedia)) {
+                        $tahunData = $tahunTersedia;
+                    } else {
+                        $tahunData = [$tahunSekarang];
+                    }
+                    if(!in_array($tahunSekarang, $tahunData)) {
+                        $tahunData[] = $tahunSekarang;
+                        rsort($tahunData);
+                    }
                 @endphp
-                @for($tahun = $tahunSekarang; $tahun >= $tahunAwal; $tahun--)
+                @foreach($tahunData as $tahun)
                     <option value="{{ $tahun }}">{{ $tahun }}</option>
-                @endfor
+                @endforeach
             </select>
             <div class="flex justify-end gap-2">
                 <button type="button" onclick="toggleModal(false)" class="px-3 py-1 rounded bg-gray-200">Batal</button>

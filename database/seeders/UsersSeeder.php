@@ -14,19 +14,30 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
+        // Admin user
         User::create([
-            'nama' => 'admin',
-            'email' => 'admin@gmail.com',
+            'nama' => 'Administrator',
+            'email' => 'admin@laundrynotes.com',
             'password' => Hash::make('admin123'),
             'role' => 'admin',
         ]);
 
-        for ($i = 1; $i <= 10; $i++) {
+        $kasirData = [
+            ['nama' => 'Siti Nurhaliza', 'email' => 'siti.nurhaliza@laundrynotes.com'],
+            ['nama' => 'Ahmad Fauzi', 'email' => 'ahmad.fauzi@laundrynotes.com'],
+            ['nama' => 'Dewi Sartika', 'email' => 'dewi.sartika@laundrynotes.com'],
+            ['nama' => 'Budi Santoso', 'email' => 'budi.santoso@laundrynotes.com'],
+            ['nama' => 'Rina Kusumawati', 'email' => 'rina.kusumawati@laundrynotes.com'],
+            ['nama' => 'Joko Widodo', 'email' => 'joko.widodo@laundrynotes.com'],
+            ['nama' => 'Maya Sari', 'email' => 'maya.sari@laundrynotes.com'],
+        ];
+
+        foreach ($kasirData as $kasir) {
             User::create([
-                'email' => "kasir{$i}@example.com",
+                'nama' => $kasir['nama'],
+                'email' => $kasir['email'],
+                'password' => Hash::make('password123'),
                 'role' => 'kasir',
-                'password' => Hash::make('password'),
-                'nama' => "Kasir {$i}",
             ]);
         }
     }

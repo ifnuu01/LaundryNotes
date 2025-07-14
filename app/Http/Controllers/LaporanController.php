@@ -14,10 +14,21 @@ class LaporanController extends Controller
             DB::raw('YEAR(tanggal_selesai) as tahun'),
             DB::raw('COUNT(*) as jumlah_pesanan')
         )
-            ->where('status', 'selesai')
+            ->where('status', 'Selesai')
+            ->whereNotNull('tanggal_selesai')
             ->groupBy(DB::raw('YEAR(tanggal_selesai)'))
             ->get();
-        return view('laporan.jumlah-pemesanan', compact('pemesanan'));
+
+        // Ambil tahun yang tersedia untuk dropdown
+        $tahunTersedia = Pesanan::selectRaw('YEAR(tanggal_selesai) as tahun')
+            ->where('status', 'Selesai')
+            ->whereNotNull('tanggal_selesai')
+            ->groupBy('tahun')
+            ->orderBy('tahun', 'desc')
+            ->pluck('tahun')
+            ->toArray();
+
+        return view('laporan.jumlah-pemesanan', compact('pemesanan', 'tahunTersedia'));
     }
     public function cetakPemesanan()
     {
@@ -27,7 +38,8 @@ class LaporanController extends Controller
             DB::raw('MONTH(tanggal_selesai) as bulan'),
             DB::raw('COUNT(*) as jumlah_pesanan')
         )
-            ->where('status', 'selesai')
+            ->where('status', 'Selesai')
+            ->whereNotNull('tanggal_selesai')
             ->whereYear('tanggal_selesai', $tahun)
             ->groupBy(DB::raw('MONTH(tanggal_selesai)'))
             ->get();
@@ -47,11 +59,21 @@ class LaporanController extends Controller
             DB::raw('SUM(pesanans.berat_kg * pakets.harga_per_kg) as total_pendapatan')
         )
             ->join('pakets', 'pesanans.paket_id', '=', 'pakets.id')
-            ->where('pesanans.status', 'selesai')
+            ->where('pesanans.status', 'Selesai')
+            ->whereNotNull('pesanans.tanggal_selesai')
             ->groupBy(DB::raw('YEAR(tanggal_selesai)'))
             ->get();
 
-        return view('laporan.total-pendapatan', compact('pendapatan'));
+        // Ambil tahun yang tersedia untuk dropdown
+        $tahunTersedia = Pesanan::selectRaw('YEAR(tanggal_selesai) as tahun')
+            ->where('status', 'Selesai')
+            ->whereNotNull('tanggal_selesai')
+            ->groupBy('tahun')
+            ->orderBy('tahun', 'desc')
+            ->pluck('tahun')
+            ->toArray();
+
+        return view('laporan.total-pendapatan', compact('pendapatan', 'tahunTersedia'));
     }
 
     public function cetakPendapatan()
@@ -63,7 +85,8 @@ class LaporanController extends Controller
             DB::raw('SUM(pesanans.berat_kg * pakets.harga_per_kg) as total_pendapatan')
         )
             ->join('pakets', 'pesanans.paket_id', '=', 'pakets.id')
-            ->where('pesanans.status', 'selesai')
+            ->where('pesanans.status', 'Selesai')
+            ->whereNotNull('pesanans.tanggal_selesai')
             ->whereYear('pesanans.tanggal_selesai', $tahun)
             ->groupBy(DB::raw('MONTH(tanggal_selesai)'))
             ->get();
@@ -83,14 +106,24 @@ class LaporanController extends Controller
             DB::raw('COUNT(*) as jumlah_dipesan'),
             'pakets.nama as nama'
         )
-            ->groupBy('paket_id')
+            ->groupBy('paket_id', 'pakets.nama')
             ->orderByDesc('jumlah_dipesan')
             ->join('pakets', 'pesanans.paket_id', '=', 'pakets.id')
-            ->where('pesanans.status', 'selesai')
+            ->where('pesanans.status', 'Selesai')
+            ->whereNotNull('pesanans.tanggal_selesai')
             ->take(5)
             ->get();
 
-        return view('laporan.paket-terlaris', compact('paketTerlaris'));
+        // Ambil tahun yang tersedia untuk dropdown
+        $tahunTersedia = Pesanan::selectRaw('YEAR(tanggal_selesai) as tahun')
+            ->where('status', 'Selesai')
+            ->whereNotNull('tanggal_selesai')
+            ->groupBy('tahun')
+            ->orderBy('tahun', 'desc')
+            ->pluck('tahun')
+            ->toArray();
+
+        return view('laporan.paket-terlaris', compact('paketTerlaris', 'tahunTersedia'));
     }
 
     public function cetakTerlaris()
@@ -105,7 +138,8 @@ class LaporanController extends Controller
             ->groupBy('paket_id', 'pakets.nama')
             ->orderByDesc('jumlah_dipesan')
             ->join('pakets', 'pesanans.paket_id', '=', 'pakets.id')
-            ->where('pesanans.status', 'selesai')
+            ->where('pesanans.status', 'Selesai')
+            ->whereNotNull('pesanans.tanggal_selesai')
             ->whereYear('pesanans.tanggal_selesai', $tahun)
             ->take(5)
             ->get();
@@ -128,12 +162,25 @@ class LaporanController extends Controller
         )
             ->join('users', 'pesanans.user_id', '=', 'users.id')
             ->join('pakets', 'pesanans.paket_id', '=', 'pakets.id')
-            ->where('pesanans.status', 'selesai')
+            ->where('pesanans.status', 'Selesai')
             ->where('users.role', 'kasir')
+            ->whereNotNull('pesanans.tanggal_selesai')
             ->groupBy('users.id', 'users.nama')
             ->orderByDesc('total_pendapatan')
             ->get();
-        return view('laporan.kinerja-kasir', compact('kinerjaKasir'));
+
+        // Ambil tahun yang tersedia untuk dropdown
+        $tahunTersedia = Pesanan::selectRaw('YEAR(tanggal_selesai) as tahun')
+            ->join('users', 'pesanans.user_id', '=', 'users.id')
+            ->where('pesanans.status', 'Selesai')
+            ->where('users.role', 'kasir')
+            ->whereNotNull('pesanans.tanggal_selesai')
+            ->groupBy('tahun')
+            ->orderBy('tahun', 'desc')
+            ->pluck('tahun')
+            ->toArray();
+
+        return view('laporan.kinerja-kasir', compact('kinerjaKasir', 'tahunTersedia'));
     }
 
     public function cetakKinerjaKasir()
@@ -147,8 +194,9 @@ class LaporanController extends Controller
         )
             ->join('users', 'pesanans.user_id', '=', 'users.id')
             ->join('pakets', 'pesanans.paket_id', '=', 'pakets.id')
-            ->where('pesanans.status', 'selesai')
+            ->where('pesanans.status', 'Selesai')
             ->where('users.role', 'kasir')
+            ->whereNotNull('pesanans.tanggal_selesai')
             ->whereYear('pesanans.tanggal_selesai', $tahun)
             ->groupBy('users.id', 'users.nama')
             ->orderByDesc('total_pendapatan')

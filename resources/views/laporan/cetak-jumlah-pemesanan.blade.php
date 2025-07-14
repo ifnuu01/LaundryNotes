@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="p-2 border border-gray-300 text-center font-bold">Rata-Rata</td>
-                        <td class="p-2 border border-gray-300 text-center font-bold">{{ $pemesanan->avg('jumlah_pesanan') }}</td>
+                        <td class="p-2 border border-gray-300 text-center font-bold">{{ ceil($pemesanan->avg('jumlah_pesanan')) }}</td>
                     </tr>
             </tbody>
         </table>

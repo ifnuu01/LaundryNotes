@@ -13,7 +13,6 @@ class PesananController extends Controller
      */
     public function index()
     {
-        // diurutkan dari tanggal pesan terbaru
         $pesanans = Pesanan::orderBy('tanggal_pesan', 'desc')->get();
         return view('pesanan.list-pesanan', compact('pesanans'));
     }

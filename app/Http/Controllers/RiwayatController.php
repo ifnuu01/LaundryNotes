@@ -12,7 +12,6 @@ class RiwayatController extends Controller
      */
     public function index()
     {
-        // pesanan dengan status selesai Proses berarti ada Selesai dan Dibatalkan
         $riwayats = Pesanan::whereIn('status', ['Selesai', 'Dibatalkan'])
             ->orderBy('tanggal_pesan', 'desc')
             ->get();

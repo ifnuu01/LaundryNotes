@@ -40,6 +40,7 @@
             <a href="#beranda" class="text-fg hover:text-skyBlueDark hover:font-semibold transition-all">Beranda</a>
             <a href="#caraKerja" class="text-fg hover:text-skyBlueDark hover:font-semibold transition-all">Cara Kerja</a>
             <a href="#paket" class="text-fg hover:text-skyBlueDark hover:font-semibold transition-all">Paket</a>
+            <a href="/login" class="bg-skyBlueDark p-4 inline-block text-white rounded-lg hover:font-semibold transition-all">Masuk</a>
         </div>
     
         {{-- Menu Sidebar --}}
@@ -62,7 +63,7 @@
         <div class="flex flex-col gap-4 bg-transparent z-20 h-[400px] justify-center animate-fade-left">
             <h1 class="text-2xl md:text-5xl font-bold text-fg">Kalau bukan hari ini <b class="text-skyBlueDark">cucinya</b>, besok siap-siap tanpa baju.</h1>
             <p class="text-base md:text-lg text-fg">Cuci, kering, lipat. Hemat waktu, hemat biaya. Antar-jemput? Siap!</p>
-            <a href="#caraKerja" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-full">Bagaimana Cara Kerjanya?</a>
+            <a href="#caraKerja" class="bg-skyBlueDark w-fit text-white font-semibold px-6 py-4 rounded-lg">Bagaimana Cara Kerjanya?</a>
         </div>
         <div class="hidden md:block animate-fade-right">
             <img src="{{asset('images/cucianGelembung.svg')}}" class="w-[400px] md:w-[650px]" alt="">
@@ -118,7 +119,7 @@
                         <p class="text-fg">Cocok untuk pakaian sehari-hari</p>
                     </div>
                 </div>
-                <button  class="bg-skyBlueDark w-full text-white font-semibold p-4 mt-4 rounded-full">Rp 7.000/Kg</button>
+                <button  class="bg-skyBlueDark w-full text-white font-semibold p-4 mt-4 rounded-lg">Rp 7.000/Kg</button>
             </div>
             <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col gap-4 lg:gap-2 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-skyBlue">
                 <h1 class="text-4xl text-skyBlueDark font-bold">Paket Express</h1>
@@ -137,7 +138,7 @@
                         <p class="text-fg">Cocok untuk pakaian kerja atau kebutuhan mendesak</p>
                     </div>
                 </div>
-                <button  class="bg-skyBlueDark w-full text-white font-semibold p-4 mt-4 rounded-full">Rp 7.000/Kg</button>
+                <button  class="bg-skyBlueDark w-full text-white font-semibold p-4 mt-4 rounded-lg">Rp 7.000/Kg</button>
             </div>
             <div data-aos="fade-up" data-aos-duration="2000" class="flex flex-col gap-4 p-4 md:p-6 justify-center items-center rounded-lg shadow-md bg-bg">
                 <h1 class="text-4xl text-skyBlueDark font-bold">Paket Premium</h1>
@@ -156,7 +157,7 @@
                         <p class="text-fg">Cuci khusus, pewangi premium, setrika</p>
                     </div>
                 </div>
-                <button  class="bg-skyBlueDark w-full text-white font-semibold p-4 mt-4 rounded-full">Rp 7.000/Kg</button>
+                <button  class="bg-skyBlueDark w-full text-white font-semibold p-4 mt-4 rounded-lg">Rp 7.000/Kg</button>
             </div>
         </div>
     </section>
@@ -168,7 +169,7 @@
              href="https://wa.me/6289501603099?text=Halo%20LaundryNotes,%20saya%20ingin%20laundry%20sekarang!"
              target="_blank"
              data-aos="fade-up" data-aos-duration="2000"
-             class="bg-white w-fit text-skyBlueDark font-semibold px-6 py-4 mt-4 rounded-full">Laundry Sekarang</a>
+             class="bg-white w-fit text-skyBlueDark font-semibold px-6 py-4 mt-4 rounded-lg">Laundry Sekarang</a>
         </div>
     </section>
 
